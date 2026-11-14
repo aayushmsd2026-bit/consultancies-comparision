@@ -47,6 +47,13 @@ Your PDF is saved in `data/source/`. It is converted to `data/consultancies.csv`
   - 24 rows have a very long name or a "previously called" note. Shorten the name. The web address of the page is made from it.
 - [ ] City and district are a best guess from the address. Spot-check them.
 
+## Admin area
+
+- **Nobody is told automatically.** When you press "Ask for proof" or reject a review, the reviewer gets no message. The queue shows their email so you can write to them yourself. Automatic emails would be a new feature.
+- The demo reviewers show no email in the queue. Real reviewers do.
+- Reviews of a consultancy that is still "Suggested, not approved" stay hidden even after you approve the review. Approve the consultancy too.
+- The admin area is English only.
+
 ## Sign-in and the review form
 
 - [ ] Follow "Set up Google sign-in" in `README.md`. I could not test the real Google button from here. Everything around it is tested with the test sign-in.

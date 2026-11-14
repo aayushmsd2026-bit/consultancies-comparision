@@ -25,8 +25,15 @@ function lookup(tree: Tree, path: string): string {
 }
 
 describe("message files", () => {
-  const enKeys = keysOf(en).sort();
+  // The admin area is used by the owner only and is English only.
+  const { admin: adminMessages, ...publicEn } = en;
+  const enKeys = keysOf(publicEn).sort();
   const neKeys = keysOf(ne).sort();
+
+  it("the admin area has its own English text", () => {
+    expect(keysOf(adminMessages).length).toBeGreaterThan(50);
+    expect(ne).not.toHaveProperty("admin");
+  });
 
   it("English and Nepali have exactly the same keys", () => {
     expect(neKeys).toEqual(enKeys);

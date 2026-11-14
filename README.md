@@ -203,6 +203,39 @@ update public.profiles set role = 'admin'
 where id = (select id from auth.users where email = 'you@example.com');
 ```
 
+## The admin area
+
+Open <http://localhost:3000/en/admin> and sign in with your admin account (see "Make your own account an admin" above).
+Anyone else sees only a sign-in box. The admin area is in English only.
+
+### Clear the review queue fast
+
+The queue shows pending reviews, newest first. One review is always selected (dark outline).
+Use the keyboard:
+
+| Key | What it does |
+| --- | --- |
+| `J` / `K` | Move down / up |
+| `O` | Show or hide the proof file |
+| `V` | Mark as verified, or remove the mark |
+| `A` | Approve. The review goes public and the scores are recalculated. |
+| `R` | Reject. Pick a reason or type one, then press `Enter`. |
+| `P` | Ask for proof. The review moves to the "Needs proof" tab. |
+
+Yellow flags point at things to look at twice (a phone number, a very short 5-star review, many reviews in one day).
+A flag never rejects anything. You decide.
+
+After you have checked a proof file, click **Delete proof file**. We promise reviewers that we do this.
+
+### The other screens
+
+- **Reports**: reviews that visitors reported. Keep the review or reject it. Both close the report.
+- **Consultancies**: search, add and edit. Set the registration status and the date last checked here.
+  Consultancies suggested by reviewers are marked "Suggested, not approved". Open one, set **Listing** to **Approved** and save.
+- **Approved tab, "Post a reply from the consultancy"**: when a consultancy emails you a reply, paste it here.
+- **CSV import**: the same import as the command below, in the browser. It checks the file first.
+- **Audit log**: every admin action, with the time and who did it. It cannot be edited.
+
 ## Import the real consultancy list
 
 `data/consultancies.csv` holds the 924 consultancies from the Ministry of Education PDF in

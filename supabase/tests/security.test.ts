@@ -346,6 +346,29 @@ describe("only admins decide", () => {
   });
 });
 
+describe("scores", () => {
+  it("only an admin can store new scores", async () => {
+    const scores = JSON.stringify([
+      { id: OPEN_CONSULTANCY, avg_score: 4.5, review_count: 7, verified_review_count: 2, rank_score: 4.1 },
+    ]);
+    await expect(db.as(anon, "select public.apply_consultancy_scores($1::jsonb, 3.5)", [scores])).rejects.toThrow(/permission denied/);
+
+    // A normal signed-in person can call it, but the security rules stop every change.
+    await db.as(hari, "select public.apply_consultancy_scores($1::jsonb, 3.5)", [scores]);
+    const [untouched] = await db.admin(`select review_count from public.consultancies where id = '${OPEN_CONSULTANCY}'`);
+    expect(untouched.review_count).not.toBe(7);
+
+    await db.as(admin, "select public.apply_consultancy_scores($1::jsonb, 3.5)", [scores]);
+    const [stored] = await db.admin(`select avg_score, review_count, rank_score from public.consultancies where id = '${OPEN_CONSULTANCY}'`);
+    expect(stored).toMatchObject({ review_count: 7 });
+    expect(Number(stored.avg_score)).toBe(4.5);
+    // Consultancies without reviews get the site average as their rank score, and no visible score.
+    const [empty] = await db.admin(`select avg_score, review_count, rank_score from public.consultancies where id = '${THIRD_CONSULTANCY}'`);
+    expect(empty.avg_score).toBeNull();
+    expect(Number(empty.rank_score)).toBe(3.5);
+  });
+});
+
 describe("listings", () => {
   it("a consultancy that is not approved yet is hidden, with its branches", async () => {
     const names = await db.as(anon, "select slug from public.consultancies order by slug");

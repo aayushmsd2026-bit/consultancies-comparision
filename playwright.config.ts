@@ -14,8 +14,9 @@ export default defineConfig({
   },
   projects: [
     // A small phone first. This is the main device for our visitors.
-    { name: "phone", use: { ...devices["Pixel 7"], viewport: { width: 360, height: 780 } } },
-    { name: "tablet", use: { ...devices["Desktop Chrome"], viewport: { width: 768, height: 1024 } } },
+    // The admin tests change shared data. They run once, on the desktop layout.
+    { name: "phone", testIgnore: /admin\.spec/, use: { ...devices["Pixel 7"], viewport: { width: 360, height: 780 } } },
+    { name: "tablet", testIgnore: /admin\.spec/, use: { ...devices["Desktop Chrome"], viewport: { width: 768, height: 1024 } } },
     { name: "desktop", use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } } },
   ],
   webServer: {
