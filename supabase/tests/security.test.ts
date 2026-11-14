@@ -211,6 +211,7 @@ describe("the public can never see who wrote a review", () => {
     expect(rows.map((row) => row.table_name)).toEqual([
       "branches",
       "consultancies",
+      "public_cities",
       "public_replies",
       "public_reviews",
     ]);
@@ -350,6 +351,20 @@ describe("listings", () => {
     const names = await db.as(anon, "select slug from public.consultancies order by slug");
     expect(names.map((row) => row.slug)).not.toContain("suggested-not-approved");
     expect(await db.as(anon, "select city from public.branches")).toEqual([{ city: "Kathmandu" }]);
+  });
+
+  it("the city list only counts listed consultancies", async () => {
+    expect(await db.as(anon, "select city, consultancy_count from public.public_cities")).toEqual([
+      { city: "Kathmandu", consultancy_count: 1 },
+    ]);
+  });
+
+  it("the '3 reviews' rule in the database matches the ranking settings", async () => {
+    const { RANKING } = await import("../../src/config/ranking");
+    await db.admin(`update public.consultancies set review_count = ${RANKING.minReviewsToShowScore - 1} where slug = 'example-education'`);
+    expect(await db.admin("select score_visible from public.consultancies where slug = 'example-education'")).toEqual([{ score_visible: false }]);
+    await db.admin(`update public.consultancies set review_count = ${RANKING.minReviewsToShowScore} where slug = 'example-education'`);
+    expect(await db.admin("select score_visible from public.consultancies where slug = 'example-education'")).toEqual([{ score_visible: true }]);
   });
 
   it("search finds approved consultancies and forgives a small typo", async () => {

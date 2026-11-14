@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { getMessages, getTranslations } from "next-intl/server";
+import { hasLocale } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { ClientMessages } from "@/components/client-messages";
 import { BottomTabBar } from "@/components/ui/bottom-tab-bar";
 import { DemoBanner } from "@/components/ui/demo-banner";
 import { Footer } from "@/components/ui/footer";
@@ -12,12 +13,6 @@ import { PALETTE } from "@/config/palette";
 import { SITE_NAME, SITE_URL } from "@/config/site";
 import { routing } from "@/i18n/routing";
 import "./globals.css";
-
-/**
- * Only these groups of text are sent to the browser for interactive parts.
- * Everything else stays on the server, which keeps pages light on slow data.
- */
-const CLIENT_NAMESPACES = ["ui", "nav", "language"] as const;
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -44,10 +39,6 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[lo
   if (!hasLocale(routing.locales, locale)) notFound();
 
   const t = await getTranslations("common");
-  const messages = await getMessages();
-  const clientMessages = Object.fromEntries(
-    CLIENT_NAMESPACES.map((namespace) => [namespace, messages[namespace]]),
-  );
 
   return (
     <html lang={locale} className={`${fontVariables} h-full antialiased`}>
@@ -58,7 +49,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[lo
         >
           {t("skipToContent")}
         </a>
-        <NextIntlClientProvider messages={clientMessages}>
+        <ClientMessages>
           <ToastProvider>
             <DemoBanner />
             <Header />
@@ -68,7 +59,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[lo
             <Footer />
             <BottomTabBar />
           </ToastProvider>
-        </NextIntlClientProvider>
+        </ClientMessages>
       </body>
     </html>
   );

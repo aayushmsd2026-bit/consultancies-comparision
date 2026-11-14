@@ -3,7 +3,7 @@ import { LoaderCircle } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 
-type Variant = "primary" | "secondary" | "quiet";
+type Variant = "primary" | "secondary" | "quiet" | "inverse";
 type Size = "md" | "lg";
 
 type Common = {
@@ -22,6 +22,8 @@ const variants: Record<Variant, string> = {
     "on-signature bg-signature text-signature-ink hover:bg-signature-press active:bg-signature-press",
   secondary:
     "border-2 border-ink text-ink hover:bg-ink hover:text-paper active:bg-ink active:text-paper",
+  // For use on a signature-coloured background, where "primary" would disappear.
+  inverse: "bg-signature-ink text-signature hover:opacity-90 active:opacity-90",
   quiet:
     "text-ink underline decoration-line-strong decoration-2 underline-offset-4 hover:decoration-ink",
 };

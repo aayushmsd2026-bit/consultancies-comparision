@@ -24,14 +24,18 @@ const sizes = {
 /** A coloured tile with the first letter. We show no consultancy logos in version 1. */
 export function Monogram({
   name,
+  letter: letterFrom,
   size = "md",
   className,
 }: {
+  /** Decides the colour. Use something that never changes, like the slug. */
   name: string;
+  /** Text to take the letter from. Defaults to `name`. */
+  letter?: string;
   size?: keyof typeof sizes;
   className?: string;
 }) {
-  const letter = [...name.trim()][0]?.toUpperCase() ?? "?";
+  const letter = [...(letterFrom ?? name).trim()][0]?.toUpperCase() ?? "?";
   return (
     <span
       aria-hidden="true"

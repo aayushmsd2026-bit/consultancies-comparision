@@ -1,12 +1,12 @@
 import { PenLine } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { GlobalSearch } from "@/components/consultancy/global-search";
 import { Link } from "@/i18n/navigation";
 import { ButtonLink } from "./button";
 import { LanguageSwitch } from "./language-switch";
 import { Logo } from "./logo";
 
 const links = [
-  { href: "/consultancies", key: "search" },
   { href: "/compare", key: "compare" },
   { href: "/guides", key: "guides" },
 ] as const;
@@ -26,6 +26,9 @@ export function Header() {
         <div className="flex items-center gap-1 sm:gap-2">
           <nav aria-label={t("main")} className="hidden md:block">
             <ul className="flex items-center">
+              <li>
+                <GlobalSearch />
+              </li>
               {links.map((link) => (
                 <li key={link.key}>
                   <Link

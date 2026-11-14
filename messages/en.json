@@ -5,7 +5,11 @@
   },
   "common": {
     "skipToContent": "Skip to content",
-    "demoBanner": "Demo data. Not real reviews."
+    "demoBanner": "Demo data. Not real reviews.",
+    "notFoundTitle": "This page does not exist",
+    "notFoundBody": "The link may be old, or the name may be spelled differently.",
+    "backHome": "Go to the home page",
+    "loading": "Loading"
   },
   "language": {
     "label": "Language",
@@ -16,7 +20,40 @@
   },
   "home": {
     "heroTitle": "Check before you pay.",
-    "heroBody": "Honest reviews of study-abroad consultancies in Nepal, written by students."
+    "heroBody": "Honest reviews of study-abroad consultancies in Nepal, written by students.",
+    "checkLink": "Only need the registration status? Check it here",
+    "factsTitle": "The site in numbers",
+    "facts": {
+      "reviews": "reviews from students",
+      "consultancies": "consultancies listed",
+      "verified": "verified reviews"
+    },
+    "howTitle": "How it works",
+    "how": {
+      "1": {
+        "title": "Search",
+        "body": "Type the name of a consultancy."
+      },
+      "2": {
+        "title": "Check",
+        "body": "See if it is registered, and read what past students say."
+      },
+      "3": {
+        "title": "Share",
+        "body": "Used one yourself? Write a review in three minutes."
+      }
+    },
+    "latestTitle": "Latest reviews",
+    "latestAll": "Browse all consultancies",
+    "topTitle": "Top rated by country",
+    "topEmpty": "Not enough reviews yet for {country}.",
+    "topAll": "See all for {country}",
+    "trustTitle": "Ratings cannot be bought.",
+    "trustBody": "No consultancy can pay to change a score, move up a list or remove a review. Every ranking uses one public formula.",
+    "trustLink": "Read how reviews are checked",
+    "closingTitle": "Used a consultancy? Tell the next student.",
+    "closingBody": "It takes about three minutes. You can stay anonymous.",
+    "closingCta": "Write a review"
   },
   "nav": {
     "main": "Main",
@@ -31,7 +68,10 @@
     "reviewPolicy": "Review policy",
     "about": "About",
     "privacy": "Privacy",
-    "terms": "Terms"
+    "terms": "Terms",
+    "searchTitle": "Search a consultancy",
+    "searchHint": "Type at least two letters. Press Enter to see all results.",
+    "consultancies": "Consultancies"
   },
   "footer": {
     "promise": "Ratings cannot be bought.",
@@ -166,6 +206,11 @@
     },
     "dialog": {
       "close": "Close"
+    },
+    "error": {
+      "title": "Something went wrong",
+      "body": "Please try again in a moment.",
+      "retry": "Try again"
     }
   },
   "styleguide": {
@@ -191,5 +236,123 @@
       "navigation": "Breadcrumbs, language switch, header, tab bar and footer",
       "monogram": "Monogram tiles"
     }
+  },
+  "card": {
+    "reviews": "{count, plural, =0 {No reviews yet} one {{n} review} other {{n} reviews}}",
+    "moreCities": "+{n} more"
+  },
+  "directory": {
+    "title": "Find a consultancy",
+    "metaTitle": "Study-abroad consultancies in Nepal: reviews and registration | {siteName}",
+    "metaDescription": "Search consultancies in Nepal by name, city and country. See which are registered and how students rate them.",
+    "nameLabel": "Name",
+    "namePlaceholder": "Type a name",
+    "country": "Country",
+    "anyCountry": "Any country",
+    "city": "City",
+    "anyCity": "Any city",
+    "registered": "Registered only",
+    "rating": "Rating",
+    "anyRating": "Any rating",
+    "ratingMin": "{score} and above",
+    "sort": "Sort by",
+    "sortRating": "Top rated",
+    "sortReviews": "Most reviews",
+    "sortName": "Name, A to Z",
+    "apply": "Show results",
+    "clear": "Clear filters",
+    "filters": "Filters",
+    "count": "{count, plural, =0 {No consultancies} one {{n} consultancy} other {{n} consultancies}}",
+    "emptyTitle": "Nothing matches these filters",
+    "emptyBody": "Try a shorter name, or remove a filter.",
+    "previous": "Previous",
+    "next": "Next",
+    "pageOf": "Page {page} of {total}",
+    "pagination": "Pages",
+    "sortNote": "Consultancies with fewer than 3 reviews come after those with a score."
+  },
+  "profile": {
+    "metaTitle": "{name} reviews, fees and registration status | {siteName}",
+    "metaDescription": "Is {name} registered? Read student reviews, see the score breakdown, typical fees and visa results before you pay.",
+    "in": "{name} in {city}",
+    "scoreTitle": "Overall score",
+    "basedOn": "{count, plural, one {Based on {n} review} other {Based on {n} reviews}}",
+    "breakdownTitle": "Score breakdown",
+    "notEnoughTitle": "Not enough reviews yet",
+    "notEnoughBody": "{count, plural, =0 {Nobody has reviewed this consultancy yet.} one {This consultancy has {n} review.} other {This consultancy has {n} reviews.}} We show a score from 3 reviews.",
+    "firstCta": "Write the first review",
+    "writeCta": "Write a review",
+    "factsTitle": "Key facts",
+    "factReviews": "Reviews",
+    "factVerified": "From verified students",
+    "factVisa": "Visa granted",
+    "factVisaNote": "{count, plural, one {of {n} finished case} other {of {n} finished cases}}",
+    "factCharge": "Typical service charge",
+    "factChargeNote": "{count, plural, one {from {n} review} other {from {n} reviews}}",
+    "noData": "Not enough data",
+    "aboutTitle": "About",
+    "website": "Website",
+    "registrationNumber": "Registration number",
+    "branchesTitle": "Branches",
+    "headOffice": "Head office",
+    "countriesTitle": "Countries",
+    "claimed": "This profile is managed by the consultancy.",
+    "reviewsTitle": "Reviews",
+    "filterTitle": "Filter reviews",
+    "allCountries": "All countries",
+    "allOutcomes": "All outcomes",
+    "verifiedOnly": "Verified only",
+    "sortLabel": "Sort",
+    "sortNewest": "Newest",
+    "sortVerified": "Verified first",
+    "sortHighest": "Highest score",
+    "sortLowest": "Lowest score",
+    "showing": "{count, plural, one {{n} review} other {{n} reviews}}",
+    "noMatch": "No reviews match these filters.",
+    "clearFilters": "Clear filters",
+    "compare": "Compare",
+    "actions": "Actions",
+    "showMore": "Show {n} more"
+  },
+  "check": {
+    "title": "Is it registered?",
+    "metaTitle": "Check if a consultancy is registered | {siteName}",
+    "metaDescription": "Type the name of a study-abroad consultancy and see if it is on the Ministry of Education list.",
+    "intro": "Type the name of a consultancy. We check it against the Ministry of Education list.",
+    "label": "Consultancy name",
+    "placeholder": "For example: Example Education",
+    "button": "Check",
+    "resultTitle": "Result for \"{query}\"",
+    "notFoundTitle": "Not found on our list",
+    "notFoundBody": "We could not find \"{query}\". Check the spelling first. If the name is right, ask the consultancy for its approval letter before you pay.",
+    "bestMatch": "Closest match",
+    "otherMatches": "Other close names",
+    "viewProfile": "See reviews and details",
+    "reminder": "A registration does not promise good service. Read the reviews too.",
+    "listSize": "Our list has {n} consultancies.",
+    "tooShort": "Type at least two letters."
+  },
+  "compare": {
+    "title": "Compare consultancies",
+    "metaTitle": "Compare study-abroad consultancies side by side | {siteName}",
+    "metaDescription": "Put two or three consultancies next to each other: registration, scores, visa results and fees.",
+    "intro": "Put two or three consultancies side by side.",
+    "add": "Add a consultancy",
+    "addHint": "You can compare up to three.",
+    "remove": "Remove {name}",
+    "full": "You have three. Remove one to add another.",
+    "emptyTitle": "Pick two or three consultancies",
+    "emptyBody": "Search for a name above to start.",
+    "rowHeader": "What we compare",
+    "registration": "Registration",
+    "overall": "Overall score",
+    "visa": "Visa granted",
+    "charge": "Typical service charge",
+    "reviews": "Reviews",
+    "best": "Best in this row",
+    "noData": "Not enough data",
+    "swipe": "Swipe sideways to see the others.",
+    "viewProfile": "Open profile",
+    "oneMore": "Add one more to compare."
   }
 }

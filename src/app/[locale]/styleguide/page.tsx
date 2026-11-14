@@ -124,6 +124,7 @@ export default async function StyleguidePage() {
             {steps[0]}
           </ButtonLink>
           <Button variant="secondary">{steps[1]}</Button>
+          <Button variant="inverse">{steps[3]}</Button>
           <Button variant="quiet" iconAfter={<ArrowRight aria-hidden="true" className="size-5" />}>
             {steps[2]}
           </Button>

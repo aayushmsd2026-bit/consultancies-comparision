@@ -53,9 +53,46 @@ export type ConsultancySummary = {
   slug: string;
   name: string;
   nameNe: string | null;
+  /** City of the head office. */
   city: string | null;
   registrationStatus: RegistrationStatus;
   /** Null when there are fewer than 3 approved reviews. Never show an empty score. */
   score: number | null;
   reviewCount: number;
+};
+
+export type ConsultancyCardData = ConsultancySummary & {
+  /** Every city with a branch. */
+  cities: string[];
+  countries: string[];
+  verifiedReviewCount: number;
+};
+
+export type Branch = {
+  id: string;
+  city: string | null;
+  district: string | null;
+  address: string | null;
+  phone: string | null;
+  isHeadOffice: boolean;
+};
+
+export type ConsultancyDetail = ConsultancyCardData & {
+  id: string;
+  registrationNumber: string | null;
+  registrationSourceUrl: string | null;
+  registrationCheckedAt: string | null;
+  officialGrade: string | null;
+  website: string | null;
+  phone: string | null;
+  email: string | null;
+  description: string | null;
+  isClaimed: boolean;
+  branches: Branch[];
+};
+
+/** A public review with the money fields. Used to work out the fact strip. */
+export type ReviewWithCosts = PublicReview & {
+  serviceChargeNpr: number | null;
+  extraCostsNpr: number | null;
 };

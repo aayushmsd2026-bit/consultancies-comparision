@@ -120,6 +120,7 @@ export const CONTRAST_PAIRS: { fg: TokenName; bg: TokenName; min: 3 | 4.5; use: 
   { fg: "ink-soft", bg: "paper-sunk", min: 4.5, use: "secondary text in quiet blocks" },
   { fg: "signature-ink", bg: "signature", min: 4.5, use: "primary button, hero text" },
   { fg: "signature-ink", bg: "signature-press", min: 4.5, use: "pressed primary button" },
+  { fg: "signature", bg: "signature-ink", min: 4.5, use: "inverse button on a signature background" },
   { fg: "signature-strong", bg: "paper", min: 4.5, use: "links, signature-coloured text" },
   { fg: "signature-strong", bg: "paper-raised", min: 4.5, use: "links on cards" },
   { fg: "ink", bg: "signature-tint", min: 4.5, use: "text on soft signature blocks" },
