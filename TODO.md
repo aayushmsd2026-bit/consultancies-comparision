@@ -47,6 +47,15 @@ Your PDF is saved in `data/source/`. It is converted to `data/consultancies.csv`
   - 24 rows have a very long name or a "previously called" note. Shorten the name. The web address of the page is made from it.
 - [ ] City and district are a best guess from the address. Spot-check them.
 
+## Sign-in and the review form
+
+- [ ] Follow "Set up Google sign-in" in `README.md`. I could not test the real Google button from here. Everything around it is tested with the test sign-in.
+- [ ] On the production Supabase project, switch off the Email provider.
+- The form has 11 short screens: consultancy, country, course, outcome, money, ratings, what went well, what went badly, recommend and name, proof, send. Single-choice screens move on by themselves.
+- Phone sign-in is built but switched off. It is untested, because it needs a paid SMS provider.
+- A person cannot edit a review from the site after sending it. The database allows edits while a review is pending. A "my reviews" page would be a new feature.
+- The name shown on a review comes from the Google account. There is no "change my name" page.
+
 ## Public pages: small gaps
 
 - **"Most helpful" sort.** `DESIGN.md` asks for it, but the data model has no "helpful" votes. Reviews can be sorted by newest, verified first, highest and lowest score. Adding helpful votes is a new feature to decide on.

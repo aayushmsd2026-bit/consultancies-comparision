@@ -354,5 +354,160 @@
     "swipe": "Swipe sideways to see the others.",
     "viewProfile": "Open profile",
     "oneMore": "Add one more to compare."
+  },
+  "review": {
+    "metaTitle": "Write a review | {siteName}",
+    "metaDescription": "Share your experience with a study-abroad consultancy. It takes about three minutes and you can stay anonymous.",
+    "title": "Write a review",
+    "back": "Back",
+    "next": "Continue",
+    "skip": "Skip this",
+    "optional": "optional",
+    "draftRestored": "We brought back your unfinished review.",
+    "startOver": "Start over",
+    "steps": {
+      "consultancy": {
+        "title": "Which consultancy did you use?",
+        "hint": "Search by name.",
+        "selected": "You are reviewing",
+        "change": "Change",
+        "branch": "Which branch?",
+        "anyBranch": "I am not sure",
+        "missing": "I cannot find it",
+        "missingTitle": "Tell us its name",
+        "missingHint": "We will add it after a quick check. Your review waits until then.",
+        "name": "Consultancy name",
+        "city": "City",
+        "backToSearch": "Search again"
+      },
+      "country": {
+        "title": "Which country did you apply to?"
+      },
+      "course": {
+        "title": "What did you apply for?",
+        "level": "Study level",
+        "choose": "Choose one",
+        "year": "Intake year"
+      },
+      "outcome": {
+        "title": "How did it end?"
+      },
+      "money": {
+        "title": "How much did you pay them?",
+        "hint": "Both are optional. Your amounts help other students know what is normal.",
+        "charge": "Service charge (Rs)",
+        "chargeHint": "What the consultancy charged for its own work.",
+        "extra": "Extra costs (Rs)",
+        "extraHint": "Anything they added later: documents, courier, other fees.",
+        "note": "What were the extra costs for?"
+      },
+      "ratings": {
+        "title": "Rate your experience",
+        "hint": "One star is very bad. Five stars is very good.",
+        "afterVisaHint": "Help after the visa decision: travel, housing, follow-up.",
+        "notYet": "This does not apply to me"
+      },
+      "well": {
+        "title": "What went well?",
+        "hint": "Be specific. One or two sentences are enough.",
+        "placeholder": "For example: they explained every document and my file was ready early."
+      },
+      "badly": {
+        "title": "What went badly?",
+        "hint": "If nothing went badly, say so.",
+        "placeholder": "For example: they asked for a fee that was not mentioned at the start."
+      },
+      "final": {
+        "title": "Almost done",
+        "recommend": "Would you recommend this consultancy?",
+        "yes": "Yes",
+        "no": "No",
+        "invited": "The consultancy asked me to write this review",
+        "nameTitle": "How should your name appear?",
+        "name": "Full name",
+        "nameHint": "From your account, for example Sita Sharma",
+        "initials": "Initials only",
+        "initialsHint": "For example S. S.",
+        "anonymous": "Anonymous",
+        "anonymousHint": "No name is shown"
+      },
+      "proof": {
+        "title": "Add proof, if you can",
+        "hint": "A photo of your visa page, offer letter or payment receipt. It earns your review the \"Verified student\" mark.",
+        "label": "Proof file",
+        "privacy": "Only our team sees this. We delete it after checking."
+      },
+      "send": {
+        "title": "Send your review",
+        "signedInAs": "Signed in as {email}",
+        "signOut": "Sign out",
+        "needSignIn": "Sign in to send. This stops fake reviews. Your email is never shown.",
+        "google": "Continue with Google",
+        "submit": "Send my review",
+        "sending": "Sending",
+        "promise": "We read every review before it goes live.",
+        "devTitle": "Test sign-in (not on the live site)",
+        "email": "Email",
+        "password": "Password",
+        "devSubmit": "Sign in",
+        "phoneTitle": "Sign in with your phone",
+        "phone": "Mobile number",
+        "sendCode": "Send code",
+        "code": "Code from the SMS",
+        "verify": "Verify",
+        "signInFailed": "Sign-in did not work. Please try again."
+      }
+    },
+    "textCount": "{n} of {max} characters",
+    "thanks": {
+      "title": "Thank you",
+      "body": "We read every review before it goes live. This usually takes a few days.",
+      "proofFailed": "Your review was sent, but the proof file could not be uploaded. We may email you to ask for it.",
+      "profile": "Back to the consultancy",
+      "home": "Go to the home page"
+    },
+    "errors": {
+      "required": "Please answer this question.",
+      "tooShort": "Please write a little more. At least 10 characters.",
+      "tooLong": "This is too long. Please shorten it.",
+      "wholeNumber": "Use a whole number, without commas or dots.",
+      "notNegative": "This cannot be less than zero.",
+      "tooMuch": "This amount looks too high. Please check it.",
+      "notSignedIn": "Please sign in first.",
+      "alreadyReviewed": "You have already reviewed this consultancy. One review per person.",
+      "tooMany": "You have sent several reviews today. Please try again tomorrow.",
+      "consultancyMissing": "We could not find that consultancy. Please pick it again.",
+      "invalid": "Something in the form is not right. Please go back and check.",
+      "unknown": "We could not send your review. Please try again."
+    }
+  },
+  "report": {
+    "metaTitle": "Report a review | {siteName}",
+    "title": "Report this review",
+    "intro": "Tell us what is wrong. We look at every report. A review is removed only if it breaks the review policy.",
+    "policyLink": "Read the review policy",
+    "reviewOf": "Review of {name}",
+    "reasonTitle": "What is wrong with it?",
+    "reasons": {
+      "fake": "It looks fake",
+      "abusive": "It is abusive or hateful",
+      "personal_info": "It shares personal information",
+      "not_first_hand": "The writer did not use this consultancy",
+      "other": "Something else"
+    },
+    "details": "More detail",
+    "detailsHint": "Optional. Do not include private information.",
+    "submit": "Send report",
+    "sending": "Sending",
+    "thanksTitle": "Thank you",
+    "thanksBody": "We received your report and will look at it.",
+    "back": "Back to the consultancy",
+    "errors": {
+      "required": "Please choose a reason.",
+      "tooMany": "You have sent several reports. Please try again in an hour.",
+      "notFound": "We could not find that review.",
+      "unknown": "We could not send your report. Please try again.",
+      "tooLong": "This is too long. Please shorten it."
+    }
   }
 }

@@ -237,9 +237,58 @@ With Docker installed, you can run a full copy of Supabase locally. The tests us
 | `npm run db:stop` | Stops it. |
 | `npm run seed:build` | Rebuilds `supabase/seed.sql` after you change `supabase/seed-data.ts`. |
 
-## Google sign-in and Vercel
+## Set up Google sign-in
 
-These steps are added to this file when each phase is built:
+People write their review first and sign in at the very end. Google sign-in is free.
+You need about 15 minutes. Do it once for each Supabase project.
 
-- Google sign-in: Phase 5.
-- Deploying to Vercel: Phase 9.
+### 1. Create the Google side
+
+1. Go to <https://console.cloud.google.com> and sign in.
+2. At the top, click the project menu, then **New project**. Name it, for example, `consultancy-reviews`. Click **Create**.
+3. In the search bar type **OAuth consent screen** and open it. If it asks you to get started, do so:
+   - App name: your site name.
+   - User support email: your email.
+   - Audience: **External**.
+   - Contact email: your email. Finish.
+4. Open **Clients** (or **Credentials**), then **Create client** (or **Create credentials**, **OAuth client ID**).
+   - Application type: **Web application**.
+   - Name: `Supabase`.
+   - Under **Authorised redirect URIs** click **Add URI** and paste this, with your own project ref:
+     `https://YOUR_PROJECT_REF.supabase.co/auth/v1/callback`
+   - Click **Create**.
+5. Copy the **Client ID** and the **Client secret**. Keep the secret private.
+6. On the consent screen page, click **Publish app** so that anyone with a Google account can sign in.
+
+### 2. Tell Supabase about it
+
+1. In the Supabase dashboard open **Authentication**, then **Sign In / Providers**.
+2. Open **Google**. Switch it on. Paste the Client ID and the Client secret. Save.
+3. Open **Authentication**, then **URL Configuration**.
+   - **Site URL**: the address of your site, for example `https://your-site.com`. While you only test on your computer, use `http://localhost:3000`.
+   - **Redirect URLs**: add `http://localhost:3000/**` and, later, `https://your-site.com/**`.
+
+### 3. Test it yourself
+
+1. Start the site (`npm run dev`) and open <http://localhost:3000/en/review/new>.
+2. Search for **Demo Visa Guide** and answer the questions. Each screen has one question.
+3. On the proof screen, add any small photo, or skip it.
+4. On the last screen click **Continue with Google**. Sign in. You come back to the same screen and nothing is lost.
+5. Click **Send my review**. You see "Thank you".
+6. In Supabase open **Table Editor**, then `reviews`. Your review is there with status `pending`. The public cannot see it yet.
+7. If you added a file: open **Storage**, then `proofs`. It is in a folder named after your user id.
+
+To test "report a review": open any consultancy profile, find a review and click **Report this review**.
+
+### Sign-in options that are switched off
+
+| Setting in `.env.local` | What it does |
+| --- | --- |
+| `NEXT_PUBLIC_FEATURE_PHONE_OTP=true` | Adds sign-in with a code sent by SMS. Every SMS costs money, and you must first set up an SMS provider in Supabase (**Authentication**, **Sign In / Providers**, **Phone**). Leave it off unless you decide to pay. |
+| `NEXT_PUBLIC_FEATURE_DEV_LOGIN=true` | Adds a plain email and password box for testing without Google. It is never shown on the live site. Create the test person in Supabase: **Authentication**, **Users**, **Add user**. |
+
+On the production Supabase project, switch off the **Email** provider (**Authentication**, **Sign In / Providers**) so nobody can create an account with a made-up email.
+
+## Vercel
+
+Deploying to Vercel is added to this file in Phase 9.

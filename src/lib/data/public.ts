@@ -262,3 +262,15 @@ export async function getTopSlugs(limit = 50): Promise<string[]> {
     .limit(limit);
   return (data ?? []).map((row) => row.slug as string);
 }
+
+/** One approved review, for the "report this review" page. */
+export async function getPublicReview(id: string, locale: string): Promise<ReviewWithCosts | null> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag(TAGS.reviews);
+
+  const db = getPublicClient();
+  if (!db || !/^[0-9a-f-]{36}$/i.test(id)) return null;
+  const { data } = await db.from("public_reviews").select("*").eq("id", id).maybeSingle();
+  return data ? toReview(data as PublicReviewRow, locale) : null;
+}
