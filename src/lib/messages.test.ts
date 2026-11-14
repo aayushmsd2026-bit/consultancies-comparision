@@ -13,7 +13,9 @@ function keysOf(tree: Tree, prefix = ""): string[] {
 }
 
 function placeholdersOf(text: string): string[] {
-  return [...text.matchAll(/\{(\w+)/g)].map((m) => m[1]).sort();
+  // {name} or {name, plural, ...}. Text inside plural branches like {No results} is skipped.
+  const names = [...text.matchAll(/\{(\w+)\s*[,}]/g)].map((m) => m[1]);
+  return [...new Set(names)].sort();
 }
 
 function lookup(tree: Tree, path: string): string {

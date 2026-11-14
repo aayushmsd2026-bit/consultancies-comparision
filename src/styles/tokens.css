@@ -1,0 +1,116 @@
+/*
+ * GENERATED FILE. Do not edit by hand.
+ * Source: src/config/palette.ts. Rebuild with: npm run tokens
+ *
+ * Sanzo Wada combination 166:
+ *   Grenadine Pink #f48067, Naples Yellow #fbe6a0, Deep Slate Green #112f2c
+ */
+
+/* Light mode. "@theme" also tells Tailwind these colours exist (bg-paper, text-ink, ...). */
+@theme {
+  --color-*: initial;
+  --color-paper: #fcf7e7;
+  --color-paper-raised: #fffcf5;
+  --color-paper-sunk: #f6edcf;
+  --color-line: #d8d1b8;
+  --color-line-strong: #617a77;
+  --color-ink: #112f2c;
+  --color-ink-soft: #395653;
+  --color-signature: #f48067;
+  --color-signature-ink: #112f2c;
+  --color-signature-strong: #b6351a;
+  --color-signature-tint: #ffe7e1;
+  --color-signature-press: #e9745b;
+  --color-signature-graphic: #dc593e;
+  --color-spark: #fbe6a0;
+  --color-spark-ink: #112f2c;
+  --color-ok: #005a53;
+  --color-ok-tint: #cbf1ec;
+  --color-warn: #6d5900;
+  --color-warn-tint: #f9e49f;
+  --color-bad: #a52202;
+  --color-bad-tint: #ffe0d8;
+  --color-focus: #112f2c;
+}
+
+/* Dark mode when the phone or computer is set to dark. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --color-paper: #112f2c;
+    --color-paper-raised: #1a3c39;
+    --color-paper-sunk: #092320;
+    --color-line: #2d4f4b;
+    --color-line-strong: #719490;
+    --color-ink: #f8f2dc;
+    --color-ink-soft: #d2cbb1;
+    --color-signature: #f48067;
+    --color-signature-ink: #112f2c;
+    --color-signature-strong: #ff9780;
+    --color-signature-tint: #583128;
+    --color-signature-press: #e9745b;
+    --color-signature-graphic: #f48067;
+    --color-spark: #fbe6a0;
+    --color-spark-ink: #112f2c;
+    --color-ok: #88e5da;
+    --color-ok-tint: #0b4a45;
+    --color-warn: #f0d680;
+    --color-warn-tint: #4d4219;
+    --color-bad: #ffb6a5;
+    --color-bad-tint: #632e22;
+    --color-focus: #fbe6a0;
+  }
+}
+
+/* Force one mode on any part of a page: <section data-theme="dark">. */
+[data-theme="light"] {
+  color-scheme: light;
+  --color-paper: #fcf7e7;
+  --color-paper-raised: #fffcf5;
+  --color-paper-sunk: #f6edcf;
+  --color-line: #d8d1b8;
+  --color-line-strong: #617a77;
+  --color-ink: #112f2c;
+  --color-ink-soft: #395653;
+  --color-signature: #f48067;
+  --color-signature-ink: #112f2c;
+  --color-signature-strong: #b6351a;
+  --color-signature-tint: #ffe7e1;
+  --color-signature-press: #e9745b;
+  --color-signature-graphic: #dc593e;
+  --color-spark: #fbe6a0;
+  --color-spark-ink: #112f2c;
+  --color-ok: #005a53;
+  --color-ok-tint: #cbf1ec;
+  --color-warn: #6d5900;
+  --color-warn-tint: #f9e49f;
+  --color-bad: #a52202;
+  --color-bad-tint: #ffe0d8;
+  --color-focus: #112f2c;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-paper: #112f2c;
+  --color-paper-raised: #1a3c39;
+  --color-paper-sunk: #092320;
+  --color-line: #2d4f4b;
+  --color-line-strong: #719490;
+  --color-ink: #f8f2dc;
+  --color-ink-soft: #d2cbb1;
+  --color-signature: #f48067;
+  --color-signature-ink: #112f2c;
+  --color-signature-strong: #ff9780;
+  --color-signature-tint: #583128;
+  --color-signature-press: #e9745b;
+  --color-signature-graphic: #f48067;
+  --color-spark: #fbe6a0;
+  --color-spark-ink: #112f2c;
+  --color-ok: #88e5da;
+  --color-ok-tint: #0b4a45;
+  --color-warn: #f0d680;
+  --color-warn-tint: #4d4219;
+  --color-bad: #ffb6a5;
+  --color-bad-tint: #632e22;
+  --color-focus: #fbe6a0;
+}

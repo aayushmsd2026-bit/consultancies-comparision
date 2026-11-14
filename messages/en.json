@@ -16,7 +16,180 @@
   },
   "home": {
     "heroTitle": "Check before you pay.",
-    "heroBody": "Honest reviews of study-abroad consultancies in Nepal, written by students.",
-    "setupNote": "The project is set up. The real pages come next."
+    "heroBody": "Honest reviews of study-abroad consultancies in Nepal, written by students."
+  },
+  "nav": {
+    "main": "Main",
+    "tabs": "Quick navigation",
+    "home": "Home",
+    "search": "Search",
+    "compare": "Compare",
+    "guides": "Guides",
+    "write": "Write a review",
+    "writeShort": "Write",
+    "check": "Check registration",
+    "reviewPolicy": "Review policy",
+    "about": "About",
+    "privacy": "Privacy",
+    "terms": "Terms"
+  },
+  "footer": {
+    "promise": "Ratings cannot be bought.",
+    "independent": "An independent site. Consultancies cannot pay to change a score or remove a review.",
+    "explore": "Explore",
+    "trust": "Trust",
+    "copyright": "{siteName}. Reviews are the opinions of the students who wrote them."
+  },
+  "countries": {
+    "AU": "Australia",
+    "JP": "Japan",
+    "GB": "United Kingdom",
+    "US": "United States",
+    "CA": "Canada",
+    "KR": "South Korea",
+    "NZ": "New Zealand",
+    "DE": "Germany",
+    "FR": "France",
+    "FI": "Finland",
+    "DK": "Denmark",
+    "CY": "Cyprus",
+    "MT": "Malta",
+    "AE": "UAE",
+    "IN": "India",
+    "CN": "China",
+    "OTHER": "Other country"
+  },
+  "ui": {
+    "registration": {
+      "registered": {
+        "short": "Registered",
+        "title": "Registered",
+        "body": "This consultancy is on the Ministry of Education list."
+      },
+      "not_found": {
+        "short": "Not on the list",
+        "title": "Not on the list",
+        "body": "We could not find this consultancy on the Ministry of Education list. Ask them for their approval letter before you pay."
+      },
+      "expired": {
+        "short": "Expired",
+        "title": "Registration expired",
+        "body": "This consultancy was on the list before. Its approval is not current."
+      },
+      "unknown": {
+        "short": "Not checked",
+        "title": "Not checked yet",
+        "body": "We have not checked this consultancy against the Ministry of Education list yet."
+      },
+      "checkedOn": "Last checked on {date}",
+      "source": "See the official list"
+    },
+    "outcome": {
+      "visa_granted": "Visa granted",
+      "visa_refused": "Visa refused",
+      "withdrew": "Withdrew",
+      "in_process": "In process"
+    },
+    "studyLevel": {
+      "bachelor": "Bachelor",
+      "master": "Master",
+      "phd": "PhD",
+      "diploma": "Diploma",
+      "language": "Language course",
+      "other": "Other"
+    },
+    "ratings": {
+      "honesty": "Honesty",
+      "communication": "Communication",
+      "documents": "Documents",
+      "speed": "Speed",
+      "afterVisa": "After-visa support",
+      "notRated": "Not rated"
+    },
+    "score": {
+      "outOf": "out of 5",
+      "outOfFive": "{score} out of 5",
+      "notEnough": "Not enough reviews yet"
+    },
+    "stars": {
+      "value": "{count, plural, one {{n} star} other {{n} stars}}",
+      "word": {
+        "1": "Very bad",
+        "2": "Bad",
+        "3": "Okay",
+        "4": "Good",
+        "5": "Very good"
+      }
+    },
+    "review": {
+      "anonymous": "Anonymous student",
+      "verified": "Verified student",
+      "intake": "{year} intake",
+      "wentWell": "What went well",
+      "wentBadly": "What went badly",
+      "showRatings": "Show the five ratings",
+      "hideRatings": "Hide the five ratings",
+      "recommends": "Would recommend",
+      "doesNotRecommend": "Would not recommend",
+      "postedOn": "Posted on {date}",
+      "report": "Report this review"
+    },
+    "reply": {
+      "title": "Reply from the consultancy"
+    },
+    "search": {
+      "label": "Search a consultancy",
+      "placeholder": "Search a consultancy",
+      "submit": "Search",
+      "suggestions": "Suggestions",
+      "noResults": "No consultancy found for \"{query}\". Check the spelling or try a shorter name.",
+      "error": "Search is not working right now. Please try again.",
+      "resultCount": "{count, plural, =0 {No suggestions} one {{n} suggestion} other {{n} suggestions}}"
+    },
+    "upload": {
+      "choose": "Choose a file",
+      "limits": "JPG, PNG or PDF. Up to {size}.",
+      "wrongType": "This file type does not work. Use a JPG, PNG or PDF.",
+      "tooBig": "This file is too big. The limit is {size}.",
+      "remove": "Remove {name}"
+    },
+    "progress": {
+      "label": "Progress",
+      "stepOf": "Step {current} of {total}",
+      "done": "Done:"
+    },
+    "breadcrumbs": {
+      "label": "You are here"
+    },
+    "toast": {
+      "dismiss": "Close message"
+    },
+    "dialog": {
+      "close": "Close"
+    }
+  },
+  "styleguide": {
+    "title": "Styleguide",
+    "intro": "Every building block of the site, in light and dark mode. Switch the language at the top to see Nepali.",
+    "light": "Light",
+    "dark": "Dark",
+    "palette": "Palette",
+    "paletteNote": "Sanzo Wada, combination {number}: {names}.",
+    "type": "Type",
+    "sections": {
+      "buttons": "Buttons",
+      "search": "Search field",
+      "badges": "Registration badge",
+      "score": "Score dial and rating bars",
+      "inputs": "Star and slider input",
+      "review": "Review card and reply",
+      "chips": "Chips and tags",
+      "tabs": "Tabs",
+      "progress": "Stepper and progress line",
+      "fields": "Text field, select and file upload",
+      "feedback": "Toast, dialog, empty state and skeleton",
+      "navigation": "Breadcrumbs, language switch, header, tab bar and footer",
+      "monogram": "Monogram tiles"
+    }
   }
 }

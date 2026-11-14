@@ -1,0 +1,38 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
+/** True once the element has scrolled into view. Stays true. */
+export function useInView<T extends Element>(threshold = 0.35) {
+  const ref = useRef<T>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (!("IntersectionObserver" in window)) {
+      const id = requestAnimationFrame(() => setInView(true));
+      return () => cancelAnimationFrame(id);
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          io.disconnect();
+        }
+      },
+      { threshold },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [threshold]);
+
+  return { ref, inView };
+}
+
+export function prefersReducedMotion(): boolean {
+  return (
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+}

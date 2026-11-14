@@ -11,9 +11,14 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "check": "npm run lint && npm run typecheck && npm run test"
+    "check": "npm run lint && npm run typecheck && npm run test",
+    "tokens": "tsx scripts/build-tokens.ts",
+    "palette": "tsx scripts/palette-explore.ts"
   },
   "dependencies": {
+    "dictionary-of-colour-combinations": "^1.0.2",
+    "lucide-react": "^1.73.0",
+    "nepali-date-converter": "^3.4.2",
     "next": "16.4.6",
     "next-intl": "^4.15.1",
     "react": "19.3.0",

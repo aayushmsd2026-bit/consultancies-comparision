@@ -17,6 +17,12 @@ These were open questions in the brief. They are now settled and recorded in `CL
 9. Every address starts with `/en` or `/ne`.
 10. Code is pushed straight to the `main` branch. The repo was empty and has one owner.
 
+## Design choices you can change
+
+- **Palette.** I chose Wada combination 166 (Grenadine Pink, Naples Yellow, Deep Slate Green). The two runners-up were 232 (Carmine, Pinkish Cinnamon, Deep Indigo: bolder, but red reads as "danger") and 343 (Burnt Sienna, Ivory Buff, Deep Grayish Olive, Vandar Poel's Blue: earthy and calm). To switch, use the "Change the palette" prompt in `PROMPTS.md`.
+- **Fonts.** Fraunces for headlines, Inter for text, Noto Sans Devanagari for Nepali.
+- **Numbers on Nepali pages** use Devanagari digits (४.२) and Bikram Sambat dates.
+
 ## The owner must do
 
 - [ ] Decide the site name. Then change `SITE_NAME` in `src/config/site.ts`.

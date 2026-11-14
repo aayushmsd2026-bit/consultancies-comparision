@@ -102,6 +102,29 @@ npx playwright install chromium
 | `data/` | Source lists, for example the ministry list of consultancies. |
 | `tests/e2e` | Browser tests. |
 
+## The design system
+
+- See every building block on one page: <http://localhost:3000/en/styleguide> (Nepali: `/ne/styleguide`).
+  This page is hidden on the real, live site.
+- Colours are decided in one file: `src/config/palette.ts`. They come from Sanzo Wada's
+  *A Dictionary of Color Combinations*, combination 166.
+- After changing a colour, run the two commands below. The first rewrites the CSS file.
+  The second checks that all text is still readable.
+
+```bash
+npm run tokens
+```
+
+```bash
+npm run test
+```
+
+- To browse other Wada combinations:
+
+```bash
+npm run palette
+```
+
 ## Changing text on the site
 
 All text is in `messages/en.json` and `messages/ne.json`. Change the words there.
