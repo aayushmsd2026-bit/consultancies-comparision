@@ -1,0 +1,54 @@
+import { describe, expect, it } from "vitest";
+import en from "../../messages/en.json";
+import ne from "../../messages/ne.json";
+
+type Tree = { [key: string]: string | Tree };
+
+function keysOf(tree: Tree, prefix = ""): string[] {
+  return Object.entries(tree).flatMap(([key, value]) =>
+    typeof value === "string"
+      ? [`${prefix}${key}`]
+      : keysOf(value, `${prefix}${key}.`),
+  );
+}
+
+function placeholdersOf(text: string): string[] {
+  return [...text.matchAll(/\{(\w+)/g)].map((m) => m[1]).sort();
+}
+
+function lookup(tree: Tree, path: string): string {
+  return path.split(".").reduce<string | Tree>((node, part) => {
+    return (node as Tree)[part];
+  }, tree) as string;
+}
+
+describe("message files", () => {
+  const enKeys = keysOf(en).sort();
+  const neKeys = keysOf(ne).sort();
+
+  it("English and Nepali have exactly the same keys", () => {
+    expect(neKeys).toEqual(enKeys);
+  });
+
+  it("no message is empty", () => {
+    for (const key of enKeys) {
+      expect(lookup(en, key).trim(), `en: ${key}`).not.toBe("");
+      expect(lookup(ne, key).trim(), `ne: ${key}`).not.toBe("");
+    }
+  });
+
+  it("each message uses the same placeholders in both languages", () => {
+    for (const key of enKeys) {
+      expect(placeholdersOf(lookup(ne, key)), key).toEqual(
+        placeholdersOf(lookup(en, key)),
+      );
+    }
+  });
+
+  it("the interface never shouts (no exclamation marks)", () => {
+    for (const key of enKeys) {
+      expect(lookup(en, key), `en: ${key}`).not.toContain("!");
+      expect(lookup(ne, key), `ne: ${key}`).not.toContain("!");
+    }
+  });
+});

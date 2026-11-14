@@ -213,3 +213,19 @@ Put this logic in one pure, tested function. Explain the formula in plain words 
 - When something needs the owner (an API key, a Supabase setting, a decision), stop and say exactly what to do, step by step.
 - Do not add features that are not in this file. Suggest them in `TODO.md` instead.
 - After each phase, run lint, type-check and tests. Fix what fails. Then give a short summary of what was built and how to see it.
+
+## 16. Decisions log
+
+The owner delegated the open questions ("I trust your decisions"). These decisions override anything above that says otherwise.
+
+1. **Flags.** The "account created less than 1 hour before the review" flag is dropped. Sign-in comes last, so it would fire on almost every review.
+2. **Suggested consultancies.** `consultancies` has an extra column `listing_status (approved | pending)`. Suggested consultancies are `pending` and hidden from the public until an admin approves them.
+3. **Ranking weights.** Each approved review has weight 1.5 if verified, else 1.0. `R` is the weighted average, `v` is the sum of weights, `C` is the weighted site average. `avg_score` (shown on the profile) is `R`. `rank_score` is used only for sorting. The "at least 3 approved reviews" rule uses the plain count.
+4. **Guides.** v1 guides are: how to choose, ten red flags, how to check registration. No "normal fees" guide until the owner has sources.
+5. **Home page.** No separate registration-checker box. The home search shows the registration badge in results and links to `/check`.
+6. **Empty launch.** Home sections that need data hide themselves until there is enough real data.
+7. **Name flag.** "Staff member's full name" is a rough pattern match only. It never blocks anything.
+8. **Dates.** Bikram Sambat on Nepali pages, AD on English pages.
+9. **URLs.** Every address starts with `/en` or `/ne`.
+10. **Git.** Work is committed in small steps and pushed to `main`.
+11. **Framework notes.** Next.js 16 with Cache Components. The locale is read with `next/root-params`. The request interceptor file is `src/proxy.ts` (the new name for middleware). Read `node_modules/next/dist/docs/` before using a Next.js API.

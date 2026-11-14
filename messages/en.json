@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "title": "{siteName} — honest reviews of study-abroad consultancies in Nepal",
+    "description": "Check if a consultancy is registered and read reviews from real students before you pay."
+  },
+  "common": {
+    "skipToContent": "Skip to content",
+    "demoBanner": "Demo data. Not real reviews."
+  },
+  "language": {
+    "label": "Language",
+    "en": "English",
+    "ne": "नेपाली",
+    "enShort": "EN",
+    "neShort": "ने"
+  },
+  "home": {
+    "heroTitle": "Check before you pay.",
+    "heroBody": "Honest reviews of study-abroad consultancies in Nepal, written by students.",
+    "setupNote": "The project is set up. The real pages come next."
+  }
+}
