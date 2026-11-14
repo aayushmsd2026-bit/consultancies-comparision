@@ -47,6 +47,12 @@ Your PDF is saved in `data/source/`. It is converted to `data/consultancies.csv`
   - 24 rows have a very long name or a "previously called" note. Shorten the name. The web address of the page is made from it.
 - [ ] City and district are a best guess from the address. Spot-check them.
 
+## Public pages: small gaps
+
+- **"Most helpful" sort.** `DESIGN.md` asks for it, but the data model has no "helpful" votes. Reviews can be sorted by newest, verified first, highest and lowest score. Adding helpful votes is a new feature to decide on.
+- **Unknown consultancy addresses** show the "This page does not exist" page and are marked "do not index" for search engines. Because pages are streamed, the technical status code can still be 200.
+- The compare page highlights the **lower** typical service charge as the better value.
+
 ## Database notes
 
 - Scores are recalculated in the app with the one ranking function, by reading all approved reviews. This is simple and correct. It is fast enough for tens of thousands of reviews. Revisit only if the site grows far beyond that.

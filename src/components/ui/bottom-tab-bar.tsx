@@ -22,7 +22,7 @@ export function BottomTabBar({ preview = false }: { /** Styleguide only: show it
       aria-label={t("tabs")}
       className={cn(
         "inset-x-0 bottom-0 border-t border-line bg-paper/95 backdrop-blur-sm",
-        preview ? "absolute" : "fixed z-30 pb-[env(safe-area-inset-bottom)] md:hidden",
+        preview ? "absolute" : "fixed z-30 pb-[env(safe-area-inset-bottom)] lg:hidden",
       )}
     >
       <ul className="grid grid-cols-4">

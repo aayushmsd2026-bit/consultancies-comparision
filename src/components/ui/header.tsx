@@ -13,7 +13,7 @@ const links = [
 
 /**
  * Top bar: logo, Search, Compare, Guides, the language switch and one primary button.
- * On a phone the links move to the bottom tab bar. The language switch always stays.
+ * On phones and tablets the links move to the bottom tab bar. The language switch always stays.
  */
 export function Header() {
   const t = useTranslations("nav");
@@ -24,7 +24,7 @@ export function Header() {
           <Logo />
         </Link>
         <div className="flex items-center gap-1 sm:gap-2">
-          <nav aria-label={t("main")} className="hidden md:block">
+          <nav aria-label={t("main")} className="hidden lg:block">
             <ul className="flex items-center">
               <li>
                 <GlobalSearch />
@@ -42,7 +42,7 @@ export function Header() {
             </ul>
           </nav>
           <LanguageSwitch />
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <ButtonLink href="/review/new" icon={<PenLine aria-hidden="true" className="size-5" />}>
               {t("write")}
             </ButtonLink>

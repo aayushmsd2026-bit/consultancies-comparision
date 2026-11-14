@@ -15,12 +15,14 @@ export default defineConfig({
   projects: [
     // A small phone first. This is the main device for our visitors.
     { name: "phone", use: { ...devices["Pixel 7"], viewport: { width: 360, height: 780 } } },
+    { name: "tablet", use: { ...devices["Desktop Chrome"], viewport: { width: 768, height: 1024 } } },
     { name: "desktop", use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } } },
   ],
   webServer: {
     command: `npm run build && npm run start -- --port ${PORT}`,
     url: `http://localhost:${PORT}/en`,
-    reuseExistingServer: !process.env.CI,
+    // Always a fresh build, so the tests never run against old code.
+    reuseExistingServer: false,
     timeout: 240_000,
   },
 });

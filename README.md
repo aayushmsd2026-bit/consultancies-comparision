@@ -78,7 +78,10 @@ To stop the site, press `Ctrl + C` in the terminal.
 | `npm run test` | Runs the fast tests (logic, translations). |
 | `npm run test:e2e` | Opens a hidden browser and clicks through the site like a visitor. |
 
-The first time you run `npm run test:e2e` on your computer, run this once before it:
+`npm run test:e2e` needs two things on your computer:
+
+1. Docker, with the local database running (`npm run db:start`). The tests use the fictional demo data.
+2. A browser for the tests. Install it once:
 
 ```bash
 npx playwright install chromium

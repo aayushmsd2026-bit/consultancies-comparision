@@ -136,7 +136,7 @@ async function Profile({ params }: Pick<Props, "params">) {
           sourceUrl={consultancy.registrationSourceUrl}
         />
 
-        <div className="mt-6 hidden gap-3 md:flex">
+        <div className="mt-6 hidden gap-3 lg:flex">
           <ButtonLink href={writeHref} icon={<PenLine aria-hidden="true" className="size-5" />}>
             {t("writeCta")}
           </ButtonLink>
@@ -315,7 +315,7 @@ async function Profile({ params }: Pick<Props, "params">) {
       {/* Phone: the two main actions stay within reach of the thumb, just above the tab bar. */}
       <nav
         aria-label={t("actions")}
-        className="sticky bottom-[calc(4rem+env(safe-area-inset-bottom))] z-20 border-t border-line bg-paper/95 backdrop-blur-sm md:hidden"
+        className="sticky bottom-[calc(4rem+env(safe-area-inset-bottom))] z-20 border-t border-line bg-paper/95 backdrop-blur-sm lg:hidden"
       >
         <div className="page flex gap-2 py-2">
           <ButtonLink href={writeHref} className="flex-[1.5] px-3 whitespace-nowrap">

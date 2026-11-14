@@ -30,7 +30,7 @@ export function Footer() {
   const t = useTranslations("nav");
   const tFooter = useTranslations("footer");
   return (
-    <footer data-theme="dark" className="pt-16 pb-28 md:pb-16">
+    <footer data-theme="dark" className="pt-16 pb-28 lg:pb-16">
       <div className="page grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <Logo />
