@@ -13,18 +13,27 @@
     "test:e2e": "playwright test",
     "check": "npm run lint && npm run typecheck && npm run test",
     "tokens": "tsx scripts/build-tokens.ts",
-    "palette": "tsx scripts/palette-explore.ts"
+    "palette": "tsx scripts/palette-explore.ts",
+    "seed:build": "tsx scripts/generate-seed.ts",
+    "import": "tsx scripts/import-consultancies.ts",
+    "db:start": "supabase start -x realtime,imgproxy,mailpit,postgres-meta,studio,edge-runtime,logflare,vector,supavisor",
+    "db:reset": "supabase db reset",
+    "db:stop": "supabase stop"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.119.0",
     "dictionary-of-colour-combinations": "^1.0.2",
     "lucide-react": "^1.73.0",
     "nepali-date-converter": "^3.4.2",
     "next": "16.4.6",
     "next-intl": "^4.15.1",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.16",
     "@playwright/test": "1.63.0",
     "@tailwindcss/turbopack": "4.3.3",
     "@testing-library/jest-dom": "^7.0.1",
@@ -36,6 +45,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
     "jsdom": "^31.0.1",
+    "supabase": "^3.1.0",
     "tailwindcss": "4.3.3",
     "tsx": "^4.23.15",
     "typescript": "^5",

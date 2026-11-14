@@ -35,9 +35,22 @@ These were open questions in the brief. They are now settled and recorded in `CL
 
 ## The ministry list (data/)
 
-- [ ] Confirm what the list means before launch. Its title says it lists consultancies that **applied for renewal** for fiscal year 2081/82. That may not be the same as "currently approved". The site must not say "registered" unless that is true.
-- [ ] Add the public web address of the list (the source link shown next to every registration badge).
-- [ ] The list has no registration numbers, phone numbers or websites. Those columns stay empty.
+Your PDF is saved in `data/source/`. It is converted to `data/consultancies.csv` (924 rows, no errors in a dry run). Nothing has been imported into any real database.
+
+- [ ] **Confirm what the list means before launch.** Its title says it lists consultancies that **applied for renewal** for fiscal year 2081/82. That may not be the same as "currently approved". The import marks every row "Registered". If you are not sure, import with `--status unknown`.
+- [ ] Find the public web address of the list. It is shown next to every registration badge (`--source-url`).
+- [ ] The list has no registration numbers, phone numbers, websites or countries. Those columns are empty.
+- [ ] Open `data/consultancies.csv` in a spreadsheet and look at the `check` column:
+  - 137 rows have no address in the PDF.
+  - 29 rows have an address but the city was not recognised.
+  - 7 rows have Nepali text that the PDF did not give back correctly. Retype those addresses from the PDF.
+  - 24 rows have a very long name or a "previously called" note. Shorten the name. The web address of the page is made from it.
+- [ ] City and district are a best guess from the address. Spot-check them.
+
+## Database notes
+
+- Scores are recalculated in the app with the one ranking function, by reading all approved reviews. This is simple and correct. It is fast enough for tens of thousands of reviews. Revisit only if the site grows far beyond that.
+- A person can post at most 5 reviews in 24 hours. This limit is in the database.
 
 ## Ideas, not built (out of scope for v1)
 

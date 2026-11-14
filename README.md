@@ -130,10 +130,113 @@ npm run palette
 All text is in `messages/en.json` and `messages/ne.json`. Change the words there.
 Both files must have the same keys. A test fails if one is missing.
 
-## Supabase, Google sign-in and Vercel
+## Set up Supabase (the database)
+
+Supabase stores the consultancies, the reviews and the proof files. It is free for a site this size.
+
+### 1. Create the project
+
+1. Go to <https://supabase.com> and sign up.
+2. Click **New project**.
+3. Name: anything, for example `consultancy-reviews-dev`.
+4. Database password: click **Generate a password**. **Save it** in a password manager. You need it in step 3.
+5. Region: choose **South Asia (Mumbai)**. It is the closest to Nepal.
+6. Click **Create new project** and wait about two minutes.
+
+### 2. Copy the keys
+
+1. In the Supabase dashboard open **Project Settings** (the gear icon), then **API Keys**.
+2. Open the file `.env.local` on your computer.
+3. Paste three values:
+   - `NEXT_PUBLIC_SUPABASE_URL`: the project URL. It looks like `https://abcdefgh.supabase.co`.
+   - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`: the **publishable** key. It starts with `sb_publishable_`.
+   - `SUPABASE_SECRET_KEY`: the **secret** key. It starts with `sb_secret_`. Never share this one.
+
+### 3. Create the tables
+
+The part of the project URL before `.supabase.co` is your **project ref**, for example `abcdefgh`.
+
+```bash
+npx supabase login
+```
+
+```bash
+npx supabase link --project-ref YOUR_PROJECT_REF
+```
+
+It asks for the database password from step 1. Then:
+
+```bash
+npx supabase db push
+```
+
+This creates every table and every security rule from `supabase/migrations`.
+
+### 4. Add the demo data (not on the live site)
+
+Only for a development project. **Never** do this on the production database.
+
+```bash
+npx supabase db push --include-seed
+```
+
+This adds 12 fictional consultancies and about 60 fictional reviews.
+
+### 5. Look at the data
+
+In the Supabase dashboard:
+
+- **Table Editor**: every table. Try `consultancies` and `reviews`.
+- **Table Editor**, then the view `public_reviews`: this is exactly what the public can see. It has no user id, email or phone.
+- **Storage**: the private bucket `proofs`.
+- **Authentication**, then **Users**: the fictional demo reviewers.
+
+### Make your own account an admin
+
+Sign in on the site once (from Phase 5). Then in Supabase open **SQL Editor** and run this, with your own email:
+
+```sql
+update public.profiles set role = 'admin'
+where id = (select id from auth.users where email = 'you@example.com');
+```
+
+## Import the real consultancy list
+
+`data/consultancies.csv` holds the 924 consultancies from the Ministry of Education PDF in
+`data/source/`. It was made by `scripts/ministry-pdf-to-csv.py`. Read the notes in `TODO.md`
+before you import it.
+
+First check the file. This writes nothing:
+
+```bash
+npm run import -- --file data/consultancies.csv --dry-run
+```
+
+Then import. Give the public link to the official list, so visitors can check it themselves:
+
+```bash
+npm run import -- --file data/consultancies.csv --source-url https://LINK-TO-THE-OFFICIAL-LIST
+```
+
+- The import adds and updates consultancies and branches. It never creates or changes a review.
+- You can run it again with a newer file. Nothing is doubled.
+- Every consultancy in the file is marked **Registered**. To import without that mark, add `--status unknown`.
+- To try it safely, use the fictional file `data/sample-consultancies.csv`.
+
+## A database on your own computer (optional, for developers)
+
+With Docker installed, you can run a full copy of Supabase locally. The tests use it.
+
+| Command | What it does |
+| --- | --- |
+| `npm run db:start` | Starts local Supabase and loads the tables and demo data. |
+| `npm run db:reset` | Wipes the local database and loads everything again. |
+| `npm run db:stop` | Stops it. |
+| `npm run seed:build` | Rebuilds `supabase/seed.sql` after you change `supabase/seed-data.ts`. |
+
+## Google sign-in and Vercel
 
 These steps are added to this file when each phase is built:
 
-- Supabase project and keys: Phase 3.
 - Google sign-in: Phase 5.
 - Deploying to Vercel: Phase 9.
