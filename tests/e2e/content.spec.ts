@@ -28,7 +28,7 @@ test("a Nepali guide keeps the visitor in Nepali when they follow a link", async
 test("the review policy explains the trust rules and the ranking formula with the real numbers", async ({ page }) => {
   await page.goto("/en/review-policy");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Review policy");
-  await expect(page.getByText("Draft. This page has not been checked by a lawyer yet.")).toBeVisible();
+  await expect(page.getByText("Draft. This page has not been checked by a lawyer yet.")).toHaveCount(0);
   await expect(page.getByText("Ratings cannot be bought.").first()).toBeVisible();
   // These numbers come from src/config/ranking.ts, so the page cannot drift from the code.
   await expect(page.getByText(/A verified review counts as\s+1\.5\s+reviews/)).toBeVisible();
