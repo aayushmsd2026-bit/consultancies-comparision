@@ -1,5 +1,7 @@
+import type { Metadata } from "next";
 import { ArrowRight, PenLine, ShieldCheck } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
+import { JsonLd } from "@/components/json-ld";
 import { ConsultancyCard } from "@/components/consultancy/consultancy-card";
 import { ConsultancySearch } from "@/components/consultancy/consultancy-search";
 import { CountryTabs } from "@/components/home/country-tabs";
@@ -13,13 +15,22 @@ import { Link } from "@/i18n/navigation";
 import { getLatestReviews, getSiteStats, getTopRatedByCountry } from "@/lib/data/public";
 import { formatDate } from "@/lib/dates";
 import { localizeDigits } from "@/lib/format";
+import { pageMetadata, websiteJsonLd } from "@/lib/seo";
+import { SITE_NAME } from "@/config/site";
 
 /** Below this many reviews the big numbers would look empty, so we hide them. */
 const MIN_REVIEWS_FOR_FACTS = 10;
 
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const t = await getTranslations("meta");
+  return pageMetadata({ locale, path: "/", title: t("title", { siteName: SITE_NAME }), description: t("description") });
+}
+
 export default async function HomePage() {
   const locale = await getLocale();
   const t = await getTranslations("home");
+  const tMeta = await getTranslations("meta");
   const tCountry = await getTranslations("countries");
 
   const [stats, latest, topLists] = await Promise.all([
@@ -33,6 +44,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <JsonLd data={websiteJsonLd(locale, tMeta("description"))} />
       {/* 1. Hero: one giant line and the search field. Nothing else above the fold. */}
       <section className="on-signature relative overflow-hidden bg-signature text-signature-ink">
         <HeroBlocks />

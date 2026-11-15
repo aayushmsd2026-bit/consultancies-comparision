@@ -18,7 +18,7 @@ export function Breadcrumbs({ items, className }: { items: Crumb[]; className?: 
               {item.href && !last ? (
                 <Link
                   href={item.href}
-                  className="inline-flex min-h-8 items-center text-ink-soft underline-offset-4 hover:text-ink hover:underline"
+                  className="inline-flex min-h-11 items-center text-ink-soft underline-offset-4 hover:text-ink hover:underline"
                 >
                   {item.label}
                 </Link>

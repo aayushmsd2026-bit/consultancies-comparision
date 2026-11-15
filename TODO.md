@@ -47,6 +47,15 @@ Your PDF is saved in `data/source/`. It is converted to `data/consultancies.csv`
   - 24 rows have a very long name or a "previously called" note. Shorten the name. The web address of the page is made from it.
 - [ ] City and district are a best guess from the address. Spot-check them.
 
+## Search engines, speed and accessibility
+
+Scores and the full checklist are in `QUALITY.md`.
+
+- [ ] Test on your own phone, and with a screen reader if you can (TalkBack on Android). I could only test in an emulated phone.
+- [ ] After launch, add the site to Google Search Console and submit `/sitemap.xml`.
+- [ ] Preview pictures for shared links are in English only. The picture font has no Nepali letters. Adding a Nepali font file would fix it.
+- [ ] The preview pictures show the placeholder site name until `SITE_NAME` is set.
+
 ## Guides and trust pages (content/)
 
 The text is in `content/guides` and `content/pages`, one file per language. You can edit the words directly.

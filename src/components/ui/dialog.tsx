@@ -18,6 +18,7 @@ type Props = {
 /**
  * A window on top of the page. Built on the browser's own <dialog>, which keeps
  * the keyboard inside it and closes on Escape.
+ * Give one field inside it the attribute data-autofocus to start the cursor there.
  */
 export function Dialog({ open, onClose, title, children, actions, className }: Props) {
   const t = useTranslations("ui.dialog");
@@ -27,7 +28,11 @@ export function Dialog({ open, onClose, title, children, actions, className }: P
   useEffect(() => {
     const dialog = ref.current;
     if (!dialog) return;
-    if (open && !dialog.open) dialog.showModal();
+    if (open && !dialog.open) {
+      dialog.showModal();
+      // Put the cursor where the visitor will type: mark that field with data-autofocus.
+      dialog.querySelector<HTMLElement>("[data-autofocus]")?.focus();
+    }
     if (!open && dialog.open) dialog.close();
   }, [open]);
 

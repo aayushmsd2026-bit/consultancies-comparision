@@ -5,12 +5,18 @@ import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { SITE_NAME } from "@/config/site";
 import { loadTrustPage, type TrustPage } from "@/lib/content";
 import { formatDate } from "@/lib/dates";
+import { pageMetadata } from "@/lib/seo";
 
 export async function trustMetadata(page: TrustPage): Promise<Metadata> {
   const locale = await getLocale();
   const t = await getTranslations("trust");
   const { meta } = await loadTrustPage(page, locale);
-  return { title: t("pageMeta", { title: meta.title, siteName: SITE_NAME }), description: meta.description };
+  return pageMetadata({
+    locale,
+    path: `/${page}`,
+    title: t("pageMeta", { title: meta.title, siteName: SITE_NAME }),
+    description: meta.description,
+  });
 }
 
 /** The shared layout of the review policy, about, privacy and terms pages. The text is in content/pages. */

@@ -6,10 +6,16 @@ import { ReviewForm } from "@/components/review/review-form";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SITE_NAME } from "@/config/site";
 import { getConsultancy } from "@/lib/data/public";
+import { pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("review");
-  return { title: t("metaTitle", { siteName: SITE_NAME }), description: t("metaDescription") };
+  return pageMetadata({
+    locale: await getLocale(),
+    path: "/review/new",
+    title: t("metaTitle", { siteName: SITE_NAME }),
+    description: t("metaDescription"),
+  });
 }
 
 /** "Write a review" on a profile links here with ?c=the-consultancy, so the first answer is filled in. */
@@ -33,7 +39,7 @@ export default function NewReviewPage({ searchParams }: PageProps<"/[locale]/rev
     <div className="page py-8 md:py-14">
       <Suspense
         fallback={
-          <div aria-hidden="true" className="mx-auto max-w-xl">
+          <div aria-hidden="true" className="mx-auto min-h-[70svh] max-w-xl">
             <Skeleton className="h-1.5 w-full" />
             <Skeleton className="mt-12 h-10 w-4/5" />
             <Skeleton className="mt-6 h-14 w-full" />

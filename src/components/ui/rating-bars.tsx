@@ -16,30 +16,30 @@ type Props = {
 /**
  * Five thin bars: honesty, communication, documents, speed, after-visa support.
  * Name and number sit on one line, the bar runs below at full width, so it
- * never gets cramped on a small phone.
+ * never gets cramped on a small phone. Screen readers hear "Honesty 4.0".
  */
 export function RatingBars({ ratings, variant = "full", className }: Props) {
   const t = useTranslations("ui.ratings");
   const locale = useLocale();
-  const { ref, inView } = useInView<HTMLDListElement>(0.2);
+  const { ref, inView } = useInView<HTMLUListElement>(0.2);
   const full = variant === "full";
 
   return (
-    <dl ref={ref} className={cn("grid min-w-0", full ? "gap-4" : "gap-2.5 text-small", className)}>
+    <ul ref={ref} className={cn("grid min-w-0", full ? "gap-4" : "gap-2.5 text-small", className)}>
       {RATING_KEYS.map((key, i) => {
         const value = ratings[key];
         return (
-          <div key={key}>
-            <div className="flex items-baseline justify-between gap-4">
-              <dt className={cn(full && "font-medium")}>{t(key)}</dt>
-              <dd className="tabular font-semibold">
+          <li key={key}>
+            <p className="flex items-baseline justify-between gap-4">
+              <span className={cn(full && "font-medium")}>{t(key)}</span>
+              <span className="tabular font-semibold">
                 {value === null ? (
                   <span className="font-normal text-ink-soft">{t("notRated")}</span>
                 ) : (
                   formatScore(value, locale)
                 )}
-              </dd>
-            </div>
+              </span>
+            </p>
             <span
               aria-hidden="true"
               className={cn("mt-1.5 block overflow-hidden rounded-full bg-paper-sunk", full ? "h-2" : "h-1.5")}
@@ -55,9 +55,9 @@ export function RatingBars({ ratings, variant = "full", className }: Props) {
                 />
               )}
             </span>
-          </div>
+          </li>
         );
       })}
-    </dl>
+    </ul>
   );
 }

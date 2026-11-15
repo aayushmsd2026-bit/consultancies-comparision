@@ -10,7 +10,7 @@ import { Header } from "@/components/ui/header";
 import { ToastProvider } from "@/components/ui/toast";
 import { fontVariables } from "@/config/fonts";
 import { PALETTE } from "@/config/palette";
-import { SITE_NAME, SITE_URL } from "@/config/site";
+import { IS_PRODUCTION, SITE_NAME, SITE_URL } from "@/config/site";
 import { routing } from "@/i18n/routing";
 import "./globals.css";
 
@@ -24,6 +24,9 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase: new URL(SITE_URL),
     title: t("title", { siteName: SITE_NAME }),
     description: t("description"),
+    openGraph: { siteName: SITE_NAME, type: "website" },
+    // Test and preview sites hold demo data and must not be indexed.
+    ...(!IS_PRODUCTION && { robots: { index: false, follow: false } }),
   };
 }
 

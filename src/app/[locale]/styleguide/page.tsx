@@ -24,7 +24,7 @@ import { contrastRatio } from "@/lib/color";
 import { formatDate } from "@/lib/dates";
 import { formatScore } from "@/lib/format";
 import { OUTCOMES, REGISTRATION_STATUSES } from "@/lib/types";
-import { ChipsDemo, FeedbackDemo, FieldsDemo, InputsDemo, SearchDemo, TabsDemo } from "./demos";
+import { ChipsDemo, ChoiceDemo, FeedbackDemo, FieldsDemo, InputsDemo, SearchDemo, TabsDemo } from "./demos";
 import { sampleConsultancies, sampleReview } from "./fixtures";
 
 export const metadata: Metadata = { robots: { index: false, follow: false } };
@@ -175,6 +175,9 @@ export default async function StyleguidePage() {
 
       <Specimen title={t("sections.inputs")}>
         <InputsDemo />
+        <div className="mt-8">
+          <ChoiceDemo />
+        </div>
       </Specimen>
 
       <Specimen title={t("sections.review")}>

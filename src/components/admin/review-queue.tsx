@@ -339,7 +339,7 @@ export function ReviewQueue({ reviews, dates }: { reviews: AdminReview[]; dates:
         </label>
         <input
           id="reject-reason"
-          autoFocus
+          data-autofocus
           value={reason}
           onChange={(e) => setReason(e.target.value)}
           onKeyDown={(e) => {

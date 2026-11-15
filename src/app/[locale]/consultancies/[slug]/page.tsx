@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Suspense, ViewTransition, type ReactNode } from "react";
+import { ViewTransition, type ReactNode } from "react";
 import { ExternalLink, GitCompareArrows, MapPin, PenLine } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { ClientMessages } from "@/components/client-messages";
+import { JsonLd } from "@/components/json-ld";
 import { ReviewList, type ListedReview } from "@/components/consultancy/review-list";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { ButtonLink } from "@/components/ui/button";
@@ -13,13 +14,13 @@ import { Monogram } from "@/components/ui/monogram";
 import { RatingBars } from "@/components/ui/rating-bars";
 import { RegistrationBadge } from "@/components/ui/registration-badge";
 import { ScoreDial } from "@/components/ui/score-dial";
-import { Skeleton } from "@/components/ui/skeleton";
 import { isCountryCode } from "@/config/countries";
 import { SITE_NAME } from "@/config/site";
 import { getConsultancy, getConsultancyReviews, getTopSlugs } from "@/lib/data/public";
 import { cn } from "@/lib/cn";
 import { formatDate } from "@/lib/dates";
 import { formatNpr, formatPercent, localizeDigits } from "@/lib/format";
+import { absoluteUrl, breadcrumbJsonLd, consultancyJsonLd, pageMetadata } from "@/lib/seo";
 import { computeConsultancyStats } from "@/lib/stats";
 
 type Props = PageProps<"/[locale]/consultancies/[slug]">;
@@ -36,10 +37,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const consultancy = await getConsultancy(slug, locale);
   if (!consultancy) return {};
   const t = await getTranslations("profile");
-  return {
+  return pageMetadata({
+    locale,
+    path: `/consultancies/${slug}`,
     title: t("metaTitle", { name: consultancy.name, siteName: SITE_NAME }),
     description: t("metaDescription", { name: consultancy.name }),
-  };
+  });
 }
 
 function Fact({ label, value, note, small }: { label: string; value: ReactNode; note?: string; small?: boolean }) {
@@ -99,6 +102,14 @@ async function Profile({ params }: Pick<Props, "params">) {
 
   return (
     <>
+      <JsonLd data={consultancyJsonLd(consultancy, locale)} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: tNav("home"), url: absoluteUrl(locale, "/") },
+          { name: tNav("consultancies"), url: absoluteUrl(locale, "/consultancies") },
+          { name: consultancy.name, url: absoluteUrl(locale, `/consultancies/${consultancy.slug}`) },
+        ])}
+      />
       <div className="page pt-6">
         <Breadcrumbs
           items={[
@@ -330,27 +341,13 @@ async function Profile({ params }: Pick<Props, "params">) {
   );
 }
 
-function ProfileSkeleton() {
-  return (
-    <div aria-hidden="true" className="page py-10">
-      <Skeleton className="h-5 w-56" />
-      <div className="mt-8 flex gap-4">
-        <Skeleton className="size-20 rounded-card" />
-        <div className="flex-1 space-y-3">
-          <Skeleton className="h-10 w-3/4" />
-          <Skeleton className="h-6 w-1/3" />
-        </div>
-      </div>
-      <Skeleton className="mt-6 h-28 max-w-2xl rounded-card" />
-      <Skeleton className="mt-10 h-64 rounded-card" />
-    </div>
-  );
-}
-
-export default function ConsultancyPage({ params }: Props) {
-  return (
-    <Suspense fallback={<ProfileSkeleton />}>
-      <Profile params={params} />
-    </Suspense>
-  );
+/**
+ * The route parameter is read here, outside any loading boundary, on purpose.
+ * The finished page is then one complete piece of HTML: the name, badge and score
+ * are there from the first byte, with no placeholder that swaps in later.
+ * That is best for search engines and for slow phones. The price: the very first
+ * visit to a profile that was not built ahead of time waits for the database once.
+ */
+export default async function ConsultancyPage({ params }: Props) {
+  return <Profile params={params} />;
 }

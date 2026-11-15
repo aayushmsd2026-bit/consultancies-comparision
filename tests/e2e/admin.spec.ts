@@ -187,6 +187,8 @@ test("rejecting asks for a reason and removes the review from the public page", 
   await page.keyboard.press("r");
   const dialog = page.getByRole("dialog", { name: "Reject this review" });
   await expect(dialog).toBeVisible();
+  // The cursor starts in the reason box, so the admin can type or pick straight away.
+  await expect(dialog.getByLabel("Reason")).toBeFocused();
   // No reason, no rejection.
   await dialog.getByRole("button", { name: "Reject", exact: true }).click();
   await expect(dialog).toBeVisible();

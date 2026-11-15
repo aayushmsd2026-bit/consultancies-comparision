@@ -24,7 +24,7 @@ export function LanguageSwitch({ className }: { className?: string }) {
             hrefLang={locale}
             aria-current={selected ? "true" : undefined}
             className={cn(
-              "press grid min-h-10 min-w-11 place-items-center rounded-full px-3 text-small font-semibold",
+              "press grid min-h-11 min-w-11 place-items-center rounded-full px-3 text-small font-semibold",
               selected ? "bg-ink text-paper" : "text-ink hover:bg-line",
             )}
           >

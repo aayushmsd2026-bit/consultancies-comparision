@@ -274,3 +274,20 @@ export async function getPublicReview(id: string, locale: string): Promise<Revie
   const { data } = await db.from("public_reviews").select("*").eq("id", id).maybeSingle();
   return data ? toReview(data as PublicReviewRow, locale) : null;
 }
+
+/** Every listed consultancy, for the sitemap. */
+export async function getAllConsultancySlugs(): Promise<{ slug: string; updatedAt: string }[]> {
+  "use cache";
+  cacheLife("days");
+  cacheTag(TAGS.consultancies);
+
+  const db = getPublicClient();
+  if (!db) return [];
+  const all: { slug: string; updatedAt: string }[] = [];
+  for (let from = 0; from < 40_000; from += 1000) {
+    const { data } = await db.from("consultancies").select("slug, updated_at").order("slug").range(from, from + 999);
+    all.push(...(data ?? []).map((row) => ({ slug: row.slug as string, updatedAt: row.updated_at as string })));
+    if (!data || data.length < 1000) break;
+  }
+  return all;
+}

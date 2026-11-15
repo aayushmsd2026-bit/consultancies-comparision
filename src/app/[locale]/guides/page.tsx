@@ -6,10 +6,16 @@ import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 import { GUIDES, loadGuide, type GuideTone } from "@/lib/content";
 import { localizeDigits } from "@/lib/format";
+import { pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("guides");
-  return { title: t("metaTitle", { siteName: SITE_NAME }), description: t("metaDescription") };
+  return pageMetadata({
+    locale: await getLocale(),
+    path: "/guides",
+    title: t("metaTitle", { siteName: SITE_NAME }),
+    description: t("metaDescription"),
+  });
 }
 
 /** Each guide has its own colour block from the palette. */
@@ -40,11 +46,11 @@ export default async function GuidesPage() {
               )}
             >
               <div>
-                <p className="text-small font-semibold opacity-80">
+                <p className="text-small font-semibold">
                   {t("minutes", { n: localizeDigits(guide.meta.minutes ?? 3, locale) })}
                 </p>
                 <h2 className="mt-3 text-title">{guide.meta.title}</h2>
-                <p className="mt-3 opacity-90">{guide.meta.description}</p>
+                <p className="mt-3">{guide.meta.description}</p>
               </div>
               <span className="inline-flex items-center gap-2 font-semibold underline decoration-2 underline-offset-4">
                 {t("read")}

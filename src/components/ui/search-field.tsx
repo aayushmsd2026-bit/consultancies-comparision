@@ -19,6 +19,11 @@ type Props = {
   /** "hero" is the very large field on the home page. */
   size?: "md" | "hero";
   autoFocus?: boolean;
+  /**
+   * Set this when the field sits inside another form (a form inside a form is not allowed).
+   * Enter then picks the highlighted or the first suggestion and never sends the outer form.
+   */
+  nested?: boolean;
   className?: string;
 };
 
@@ -29,7 +34,7 @@ const MIN_CHARS = 2;
  * Each suggestion shows the name, the city and the registration badge.
  * Works with the keyboard: arrows move, Enter picks, Escape closes.
  */
-export function SearchField({ search, onSelect, onSubmit, size = "md", autoFocus, className }: Props) {
+export function SearchField({ search, onSelect, onSubmit, size = "md", autoFocus, nested, className }: Props) {
   const t = useTranslations("ui.search");
   const id = useId();
   const locale = useLocale();
@@ -93,21 +98,37 @@ export function SearchField({ search, onSelect, onSubmit, size = "md", autoFocus
       event.preventDefault();
       setOpen(false);
       onSelect(results[active]);
+    } else if (event.key === "Enter" && nested) {
+      // Inside another form: never let Enter send that form.
+      event.preventDefault();
+      submit();
     }
   }
+
+  function submit() {
+    if (!trimmed) return;
+    setOpen(false);
+    if (nested && results[0]) onSelect(results[0]);
+    else if (!nested) onSubmit(trimmed);
+  }
+
+  // A real <form> on its own. A plain group when it sits inside another form.
+  const Wrapper = nested ? "div" : "form";
 
   const hero = size === "hero";
 
   return (
     <div ref={wrapRef} className={cn("relative", className)}>
-      <form
+      <Wrapper
         role="search"
-        onSubmit={(event) => {
-          event.preventDefault();
-          if (!trimmed) return;
-          setOpen(false);
-          onSubmit(trimmed);
-        }}
+        onSubmit={
+          nested
+            ? undefined
+            : (event) => {
+                event.preventDefault();
+                submit();
+              }
+        }
       >
         <label htmlFor={id} className="sr-only">
           {t("label")}
@@ -133,6 +154,7 @@ export function SearchField({ search, onSelect, onSubmit, size = "md", autoFocus
             spellCheck={false}
             enterKeyHint="search"
             autoFocus={autoFocus}
+            data-autofocus={autoFocus || undefined}
             placeholder={t("placeholder")}
             value={query}
             onChange={(event) => {
@@ -155,7 +177,8 @@ export function SearchField({ search, onSelect, onSubmit, size = "md", autoFocus
             )}
           />
           <button
-            type="submit"
+            type={nested ? "button" : "submit"}
+            onClick={nested ? submit : undefined}
             className={cn(
               "press absolute top-1/2 grid -translate-y-1/2 place-items-center rounded-full bg-ink text-paper",
               hero ? "right-2 size-12 sm:right-3 sm:size-14" : "right-1.5 size-11",
@@ -169,7 +192,7 @@ export function SearchField({ search, onSelect, onSubmit, size = "md", autoFocus
             <span className="sr-only">{t("submit")}</span>
           </button>
         </div>
-      </form>
+      </Wrapper>
 
       <div
         className={cn(

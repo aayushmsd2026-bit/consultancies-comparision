@@ -368,7 +368,7 @@ export function ReviewForm({ initialConsultancy }: { initialConsultancy: Picked 
               <>
                 <div>
                   <p className="mb-2 text-ink-soft">{t("steps.consultancy.hint")}</p>
-                  <ConsultancySearch onPick={(item) => pick({ slug: item.slug, name: item.name, city: item.city })} />
+                  <ConsultancySearch nested onPick={(item) => pick({ slug: item.slug, name: item.name, city: item.city })} />
                   {errorText("consultancySlug") && (
                     <p role="alert" className="mt-2 text-small font-semibold text-bad">
                       {errorText("consultancySlug")}

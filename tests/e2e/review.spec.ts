@@ -139,6 +139,21 @@ test("flow 2: a visitor writes a review, signs in at the end, and it waits for a
   await db.storage.from("proofs").remove([proofs![0].storage_path]);
 });
 
+test("the first screen has no script errors and Enter picks a consultancy", async ({ page }) => {
+  const problems: string[] = [];
+  page.on("pageerror", (error) => problems.push(error.message));
+  await page.goto("/en/review/new");
+  await page.waitForLoadState("networkidle");
+  const search = page.getByRole("combobox", { name: "Search a consultancy" });
+  await search.fill("fictional fut");
+  await expect(page.getByRole("option", { name: /Fictional Futures/ })).toBeVisible();
+  // Enter picks the first suggestion. It must not jump to the next screen or send the form.
+  await search.press("Enter");
+  await expect(page.getByText("You are reviewing")).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Which consultancy did you use?");
+  expect(problems).toEqual([]);
+});
+
 test("a visitor can suggest a consultancy that is missing", async ({ page }) => {
   await page.goto("/en/review/new");
   await page.getByRole("button", { name: "I cannot find it" }).click();

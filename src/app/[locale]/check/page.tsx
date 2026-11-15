@@ -11,10 +11,16 @@ import { Link } from "@/i18n/navigation";
 import { getConsultancy, getSiteStats, searchConsultancies } from "@/lib/data/public";
 import { formatDate } from "@/lib/dates";
 import { formatNumber } from "@/lib/format";
+import { pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("check");
-  return { title: t("metaTitle", { siteName: SITE_NAME }), description: t("metaDescription") };
+  return pageMetadata({
+    locale: await getLocale(),
+    path: "/check",
+    title: t("metaTitle", { siteName: SITE_NAME }),
+    description: t("metaDescription"),
+  });
 }
 
 /** One field, one answer. Works as a plain form, so it needs no JavaScript at all. */
@@ -132,7 +138,7 @@ export default async function CheckPage({ searchParams }: PageProps<"/[locale]/c
         {t("intro")}{" "}
         {stats.consultancies > 0 && t("listSize", { n: formatNumber(stats.consultancies, locale) })}
       </p>
-      <Suspense fallback={<Skeleton className="mt-8 h-16 max-w-2xl" />}>
+      <Suspense fallback={<div className="min-h-[70svh]"><Skeleton className="mt-8 h-16 max-w-2xl" /></div>}>
         <Checker searchParams={searchParams} />
       </Suspense>
     </div>

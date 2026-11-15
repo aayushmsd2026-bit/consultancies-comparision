@@ -12,12 +12,18 @@ import { COUNTRIES, isCountryCode } from "@/config/countries";
 import { SITE_NAME } from "@/config/site";
 import { DIRECTORY_SORTS, getCities, listConsultancies, type DirectorySort } from "@/lib/data/public";
 import { formatScore, localizeDigits } from "@/lib/format";
+import { pageMetadata } from "@/lib/seo";
 
 const RATING_STEPS = ["4", "3"] as const;
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("directory");
-  return { title: t("metaTitle", { siteName: SITE_NAME }), description: t("metaDescription") };
+  return pageMetadata({
+    locale: await getLocale(),
+    path: "/consultancies",
+    title: t("metaTitle", { siteName: SITE_NAME }),
+    description: t("metaDescription"),
+  });
 }
 
 const first = (value: string | string[] | undefined) => (Array.isArray(value) ? value[0] : value) ?? "";
@@ -100,7 +106,7 @@ async function DirectoryContent({ searchParams }: Pick<PageProps<"/[locale]/cons
         <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {result.items.map((consultancy) => (
             <li key={consultancy.slug} className="min-w-0">
-              <ConsultancyCard consultancy={consultancy} />
+              <ConsultancyCard consultancy={consultancy} headingLevel={2} />
             </li>
           ))}
         </ul>
@@ -144,7 +150,7 @@ async function DirectoryContent({ searchParams }: Pick<PageProps<"/[locale]/cons
 
 function DirectorySkeleton() {
   return (
-    <div aria-hidden="true">
+    <div aria-hidden="true" className="min-h-[100svh]">
       <Skeleton className="h-14 w-full" />
       <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-4">
         {[0, 1, 2, 3].map((i) => (

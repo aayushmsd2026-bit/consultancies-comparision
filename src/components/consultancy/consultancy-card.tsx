@@ -13,7 +13,17 @@ import type { ConsultancyCardData } from "@/lib/types";
  * One consultancy in a list. The whole card is one big tap target.
  * The name and the score "morph" into the profile header when the page changes.
  */
-export function ConsultancyCard({ consultancy, className }: { consultancy: ConsultancyCardData; className?: string }) {
+export function ConsultancyCard({
+  consultancy,
+  headingLevel = 3,
+  className,
+}: {
+  consultancy: ConsultancyCardData;
+  /** Use 2 when the card sits directly under the page title, 3 when it sits inside a section. */
+  headingLevel?: 2 | 3;
+  className?: string;
+}) {
+  const Heading = headingLevel === 2 ? "h2" : "h3";
   const t = useTranslations("card");
   const tScore = useTranslations("ui.score");
   const locale = useLocale();
@@ -30,13 +40,13 @@ export function ConsultancyCard({ consultancy, className }: { consultancy: Consu
       <div className="flex items-start gap-4">
         <Monogram name={slug} letter={name} />
         <div className="min-w-0 flex-1">
-          <h3 className="text-heading break-words">
+          <Heading className="text-heading break-words">
             <Link href={`/consultancies/${slug}`} className="after:absolute after:inset-0 after:rounded-card">
               <ViewTransition name={`consultancy-name-${slug}`}>
                 <span className="inline-block">{name}</span>
               </ViewTransition>
             </Link>
-          </h3>
+          </Heading>
           {cities.length > 0 && (
             <p className="mt-1 flex items-center gap-1 text-small text-ink-soft">
               <MapPin aria-hidden="true" className="size-4 shrink-0" />

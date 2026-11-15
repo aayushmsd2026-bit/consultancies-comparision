@@ -7,11 +7,13 @@ import type { ConsultancySummary } from "@/lib/types";
 
 /**
  * Search suggestions: GET /api/search?q=example&locale=en
- * Returns only what the suggestion list shows. Limited to 60 requests a minute per visitor.
+ * Returns only what the suggestion list shows.
+ * Limited to 300 requests a minute per internet address. Many students can share one
+ * address on a mobile network or a college Wi-Fi, so the limit is generous.
  */
 export async function GET(request: NextRequest) {
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
-  if (!allowRequest(`search:${ip}`, 60, 60_000)) {
+  if (!allowRequest(`search:${ip}`, 300, 60_000)) {
     return NextResponse.json({ error: "Too many requests" }, { status: 429, headers: { "Retry-After": "60" } });
   }
 

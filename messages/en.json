@@ -9,7 +9,8 @@
     "notFoundTitle": "This page does not exist",
     "notFoundBody": "The link may be old, or the name may be spelled differently.",
     "backHome": "Go to the home page",
-    "loading": "Loading"
+    "loading": "Loading",
+    "notice": "Notice"
   },
   "language": {
     "label": "Language",

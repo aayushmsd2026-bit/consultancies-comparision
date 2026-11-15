@@ -5,6 +5,7 @@ An independent website where students rate and review study-abroad consultancies
 - The full plan is in [`CLAUDE.md`](CLAUDE.md).
 - The look and feel is in [`DESIGN.md`](DESIGN.md).
 - Open questions and things only the owner can do are in [`TODO.md`](TODO.md).
+- Speed, accessibility and search-engine scores are in [`QUALITY.md`](QUALITY.md).
 
 The site name is not decided yet. It is set in one place: `src/config/site.ts`.
 
@@ -104,6 +105,15 @@ npx playwright install chromium
 | `scripts/` | Small helper programs, for example the consultancy import. |
 | `data/` | Source lists, for example the ministry list of consultancies. |
 | `tests/e2e` | Browser tests. |
+
+## Search engines
+
+- Every public page has a title, a description, its own address and a link to the other language.
+- `/sitemap.xml` lists every page and every consultancy. `/robots.txt` tells search engines what to skip.
+- Each consultancy has its own preview picture for shared links, with its name, score and registration badge.
+- **Search engines are kept out until you say the site is live.** Everything except the real site
+  (`NEXT_PUBLIC_SITE_ENV=production`) is marked "do not index", because it holds demo data.
+- Set `NEXT_PUBLIC_SITE_URL` to your real address on Vercel. All links for search engines are built from it.
 
 ## The design system
 

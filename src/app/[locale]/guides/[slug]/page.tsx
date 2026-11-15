@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { ArrowRight } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { JsonLd } from "@/components/json-ld";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
-import { Skeleton } from "@/components/ui/skeleton";
 import { SITE_NAME } from "@/config/site";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 import { GUIDES, loadGuide } from "@/lib/content";
 import { localizeDigits } from "@/lib/format";
+import { absoluteUrl, articleJsonLd, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 import { toneClass } from "../page";
 
 type Props = PageProps<"/[locale]/guides/[slug]">;
@@ -23,7 +23,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const guide = await loadGuide(slug, locale);
   if (!guide) return {};
   const t = await getTranslations("guides");
-  return { title: t("articleMeta", { title: guide.meta.title, siteName: SITE_NAME }), description: guide.meta.description };
+  return pageMetadata({
+    locale,
+    path: `/guides/${slug}`,
+    title: t("articleMeta", { title: guide.meta.title, siteName: SITE_NAME }),
+    description: guide.meta.description,
+  });
 }
 
 async function Guide({ params }: Pick<Props, "params">) {
@@ -43,6 +48,14 @@ async function Guide({ params }: Pick<Props, "params">) {
 
   return (
     <article>
+      <JsonLd data={articleJsonLd({ locale, path: `/guides/${slug}`, title: meta.title, description: meta.description })} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: tNav("home"), url: absoluteUrl(locale, "/") },
+          { name: t("title"), url: absoluteUrl(locale, "/guides") },
+          { name: meta.title, url: absoluteUrl(locale, `/guides/${slug}`) },
+        ])}
+      />
       {/* A coloured opening block, different for each guide. */}
       <header className={cn(toneClass[tone], tone === "ink" && "[--color-focus:var(--color-spark)]")}>
         <div className="page pt-6 pb-14 md:pb-24">
@@ -52,7 +65,7 @@ async function Guide({ params }: Pick<Props, "params">) {
           />
           <h1 className="mt-10 max-w-[18ch] text-hero md:mt-16">{meta.title}</h1>
           <p className="mt-6 max-w-prose text-lead">{meta.description}</p>
-          <p className="mt-6 text-small font-semibold opacity-80">
+          <p className="mt-6 text-small font-semibold">
             {t("minutes", { n: localizeDigits(meta.minutes ?? 3, locale) })}
           </p>
         </div>
@@ -86,10 +99,7 @@ async function Guide({ params }: Pick<Props, "params">) {
   );
 }
 
-export default function GuidePage({ params }: Props) {
-  return (
-    <Suspense fallback={<div className="page py-16"><Skeleton className="h-64 rounded-block" /></div>}>
-      <Guide params={params} />
-    </Suspense>
-  );
+// The address is read outside any loading boundary, so the whole guide is in the first HTML.
+export default async function GuidePage({ params }: Props) {
+  return <Guide params={params} />;
 }

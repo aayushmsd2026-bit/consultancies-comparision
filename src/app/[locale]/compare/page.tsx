@@ -14,12 +14,18 @@ import { cn } from "@/lib/cn";
 import { bestIndex, compareHref, parseCompareSlugs } from "@/lib/compare";
 import { getConsultancy, getConsultancyReviews } from "@/lib/data/public";
 import { formatNpr, formatNumber, formatPercent, formatScore } from "@/lib/format";
+import { pageMetadata } from "@/lib/seo";
 import { computeConsultancyStats } from "@/lib/stats";
 import { RATING_KEYS } from "@/lib/types";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("compare");
-  return { title: t("metaTitle", { siteName: SITE_NAME }), description: t("metaDescription") };
+  return pageMetadata({
+    locale: await getLocale(),
+    path: "/compare",
+    title: t("metaTitle", { siteName: SITE_NAME }),
+    description: t("metaDescription"),
+  });
 }
 
 type Row = { label: string; cells: ReactNode[]; best: number | null };
@@ -198,7 +204,7 @@ export default async function ComparePage({ searchParams }: PageProps<"/[locale]
     <div className="page py-12 md:py-16">
       <h1 className="text-display">{t("title")}</h1>
       <p className="mt-4 max-w-prose text-lead text-ink-soft">{t("intro")}</p>
-      <Suspense fallback={<Skeleton className="mt-8 h-64 rounded-card" />}>
+      <Suspense fallback={<div className="min-h-[70svh]"><Skeleton className="mt-8 h-64 rounded-card" /></div>}>
         <Comparison searchParams={searchParams} />
       </Suspense>
     </div>

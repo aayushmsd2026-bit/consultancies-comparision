@@ -20,7 +20,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-30 border-b border-line bg-paper/95 backdrop-blur-sm">
       <div className="page flex min-h-16 items-center justify-between gap-4">
-        <Link href="/" aria-label={t("home")} className="rounded-control">
+        <Link href="/" className="inline-flex min-h-11 items-center rounded-control">
           <Logo />
         </Link>
         <div className="flex items-center gap-1 sm:gap-2">

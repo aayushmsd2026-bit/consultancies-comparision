@@ -14,10 +14,12 @@ type Props = {
   onNavigate?: () => void;
   /** Do something else with the chosen consultancy instead of opening its page (used by Compare). */
   onPick?: (item: ConsultancySummary) => void;
+  /** Set this when the search sits inside another form, such as the review form. */
+  nested?: boolean;
 };
 
 /** The search field wired to the real search and to the pages it leads to. */
-export function ConsultancySearch({ size, autoFocus, className, onNavigate, onPick }: Props) {
+export function ConsultancySearch({ size, autoFocus, className, onNavigate, onPick, nested }: Props) {
   const locale = useLocale();
   const router = useRouter();
 
@@ -35,6 +37,7 @@ export function ConsultancySearch({ size, autoFocus, className, onNavigate, onPi
     <SearchField
       size={size}
       autoFocus={autoFocus}
+      nested={nested}
       className={className}
       search={search}
       onSelect={(item) => {

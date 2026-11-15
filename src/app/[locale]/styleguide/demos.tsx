@@ -4,6 +4,7 @@ import { useCallback, useState } from "react";
 import { useLocale } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Chip, FilterChip } from "@/components/ui/chip";
+import { ChoiceCards } from "@/components/ui/choice-cards";
 import { Dialog } from "@/components/ui/dialog";
 import { Select, TextArea, TextField } from "@/components/ui/field";
 import { FileUpload } from "@/components/ui/file-upload";
@@ -63,6 +64,21 @@ export function SearchDemo({ size }: { size: "md" | "hero" }) {
       />
       <p className="mt-3 text-small text-ink-soft">{note}</p>
     </div>
+  );
+}
+
+export function ChoiceDemo() {
+  const c = useCopy();
+  const locale = useLocale();
+  const [value, setValue] = useState<string | null>("1");
+  return (
+    <ChoiceCards
+      legend={c.level}
+      name={`choice-${locale}`}
+      value={value}
+      onChange={setValue}
+      choices={c.levels.map((label, i) => ({ value: String(i), label, hint: i === 0 ? c.nameHint : undefined }))}
+    />
   );
 }
 
