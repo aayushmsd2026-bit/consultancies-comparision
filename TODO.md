@@ -47,6 +47,24 @@ Your PDF is saved in `data/source/`. It is converted to `data/consultancies.csv`
   - 24 rows have a very long name or a "previously called" note. Shorten the name. The web address of the page is made from it.
 - [ ] City and district are a best guess from the address. Spot-check them.
 
+## Guides and trust pages (content/)
+
+The text is in `content/guides` and `content/pages`, one file per language. You can edit the words directly.
+
+- [ ] **Lawyer review.** `review-policy`, `privacy` and `terms` are drafts. Each shows a yellow "Draft" note. After the review, set `draft: false` at the top of the file (in both languages) and the note disappears.
+- [ ] **About page.** Add who runs the site. Set a real contact address with `NEXT_PUBLIC_CONTACT_EMAIL` (it is `contact@example.com` now).
+- [ ] **Native Nepali review.** All seven Nepali files in `content/` and everything in `messages/ne.json` were written by an AI.
+- [ ] **Facts to verify before launch.** I kept the advice general and gave no fees or numbers. These statements still need your check:
+  - Consultancies need approval from the Ministry of Education, Science and Technology, and can show an approval letter.
+  - A branch office needs its own approval, separate from the head office. (In "How to check registration". Remove the sentence if this is not the rule.)
+  - The Ministry publishes notices and lists of approved consultancies.
+  - A student who was cheated can complain to the Ministry and to the police.
+  - Some colleges pay consultancies a commission per student, and this is not illegal.
+  - A false document can block a student from a country "for years".
+  - The privacy page says people under 16 should use the site with a parent. Choose the right age with the lawyer.
+  - The terms say the laws of Nepal apply.
+- No "normal fees" guide yet. It needs sourced numbers from you.
+
 ## Admin area
 
 - **Nobody is told automatically.** When you press "Ask for proof" or reject a review, the reviewer gets no message. The queue shows their email so you can write to them yourself. Automatic emails would be a new feature.

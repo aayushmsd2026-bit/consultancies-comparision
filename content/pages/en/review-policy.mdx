@@ -1,0 +1,95 @@
+{/* DRAFT. This page must be reviewed by a lawyer before launch. Set draft: false in meta below after the review. */}
+
+import { RANKING } from "@/config/ranking";
+import { CONTACT_EMAIL, SITE_NAME } from "@/config/site";
+
+export const meta = {
+  title: "Review policy",
+  description: "How reviews are checked, how scores and rankings are calculated, and how to report a review.",
+  draft: true,
+  updated: "2026-11-14",
+};
+
+This page explains how reviews get onto {SITE_NAME}, how we calculate scores, and what we remove. The rules are the same for every consultancy.
+
+## Our five promises
+
+1. **Ratings cannot be bought.** No payment, plan or partnership can change a score or a ranking.
+2. **No review is removed for money.** We remove a review only if it breaks the rules on this page.
+3. **Ads are always labelled.** If we ever show sponsored content, it will be marked clearly. It will never look like a review or a ranking.
+4. **One public formula.** Every ranking uses the formula explained below.
+5. **Proof stays private.** Documents you send to prove your experience are seen only by our team and are deleted after checking.
+
+## Who can write a review
+
+Anyone who used a consultancy's service for studying abroad, or seriously tried to. You must write about your own experience.
+
+You need to sign in to send a review. This helps us stop fake reviews. You choose how your name appears: full name, initials or anonymous. We never show your email or phone number.
+
+One person can write one review per consultancy.
+
+## What happens to your review
+
+1. You send it. It is **not public yet**.
+2. A person on our team reads it. We read every review before it goes live.
+3. We approve it, ask you for proof, or reject it.
+
+We do not edit your words. A review is either published as you wrote it or not published.
+
+## What "Verified student" means
+
+If you send proof, such as a visa page, an offer letter or a payment receipt, and it matches your review, we mark the review **Verified student**. We delete the file after checking.
+
+Unverified reviews are still published if they follow the rules. A verified review counts a little more in the score (see below).
+
+## What we do not publish
+
+- Reviews by people who did not use the consultancy
+- Reviews written by the consultancy, its staff or its competitors
+- Reviews written in exchange for money, a discount or a gift
+- Personal information: phone numbers, email addresses, home addresses, or the full names of staff members
+- Abuse, hate, threats, or accusations of a crime with no experience to back them up
+- Advertising
+
+If a consultancy asked you to write a review, you can still write it. Tick the box that says so.
+
+## How the score is calculated
+
+Each review has five ratings from 1 to 5: honesty, communication, documents, speed and after-visa support. The review's overall score is the plain average of the ratings given.
+
+A consultancy's score is the average of its approved reviews. A verified review counts as **{RANKING.verifiedWeight}** reviews. An unverified review counts as **{RANKING.unverifiedWeight}**.
+
+We show a score only when a consultancy has at least **{RANKING.minReviewsToShowScore}** approved reviews. Below that we show "Not enough reviews yet".
+
+## How rankings are calculated
+
+When we sort consultancies by rating, we do not use the plain average. A consultancy with two perfect reviews should not rank above one with eighty good reviews.
+
+So we use this formula:
+
+`rank score = (v ÷ (v + m)) × R + (m ÷ (v + m)) × C`
+
+- **R** is the consultancy's own average score.
+- **v** is how many approved reviews it has (verified ones count as {RANKING.verifiedWeight}).
+- **m** is {RANKING.priorWeight}.
+- **C** is the average score of all approved reviews on the site.
+
+In plain words: with few reviews, a consultancy's rank stays close to the site average. As it collects more reviews, its own average counts more and more. With many reviews, the rank score is almost the same as its own average.
+
+Consultancies with fewer than {RANKING.minReviewsToShowScore} reviews are listed after those with a score.
+
+Nothing else goes into the formula. Not payment, not how long a consultancy has been listed, not whether it has claimed its profile.
+
+## Replies from consultancies
+
+A consultancy can reply to a review. For now, it sends the reply to us and we post it under the review, marked "Reply from the consultancy". A reply does not change the review or the score.
+
+## How to report a review
+
+Every review has a **Report this review** link. Tell us what is wrong. We look at every report. If the review breaks this policy, we remove it. If it does not, it stays, even if the consultancy dislikes it.
+
+Consultancies can report reviews in the same way. They get no special treatment.
+
+## Mistakes
+
+If the registration status or other details of a consultancy are wrong, write to us at {CONTACT_EMAIL}. We correct errors quickly.

@@ -693,5 +693,20 @@
       "target": "Target",
       "note": "Note"
     }
+  },
+  "guides": {
+    "title": "Guides",
+    "metaTitle": "Guides for studying abroad from Nepal | {siteName}",
+    "metaDescription": "Short, practical guides: how to choose a consultancy, red flags to watch for, and how to check registration.",
+    "intro": "Short, practical reading before you choose a consultancy.",
+    "minutes": "{n} min read",
+    "read": "Read the guide",
+    "more": "More guides",
+    "articleMeta": "{title} | {siteName}"
+  },
+  "trust": {
+    "draft": "Draft. This page has not been checked by a lawyer yet.",
+    "updated": "Last updated on {date}",
+    "pageMeta": "{title} | {siteName}"
   }
 }

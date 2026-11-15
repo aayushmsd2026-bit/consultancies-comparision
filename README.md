@@ -130,8 +130,23 @@ npm run palette
 
 ## Changing text on the site
 
-All text is in `messages/en.json` and `messages/ne.json`. Change the words there.
+All interface text is in `messages/en.json` and `messages/ne.json`. Change the words there.
 Both files must have the same keys. A test fails if one is missing.
+
+## Guides and trust pages
+
+Long text is written as simple files in the `content` folder:
+
+- `content/guides/en` and `content/guides/ne`: the guides.
+- `content/pages/en` and `content/pages/ne`: review policy, about, privacy and terms.
+
+Open a file and change the words. A line starting with `##` is a heading. `**bold**` makes text bold.
+
+At the top of each file is a small block called `meta` with the title and description.
+Trust pages also have `draft: true`. That shows a yellow "Draft" note on the page.
+Change it to `draft: false` once a lawyer has checked the page. Do this in both languages.
+
+To add a guide: copy an existing guide file in both language folders, change the text, then add it to the list in `src/lib/content.ts`.
 
 ## Set up Supabase (the database)
 

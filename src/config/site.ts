@@ -13,3 +13,9 @@ export const SITE_URL = (
 /** True only on the real, live site. Everywhere else we show the demo banner. */
 export const IS_PRODUCTION =
   process.env.NEXT_PUBLIC_SITE_ENV === "production";
+
+/**
+ * Where visitors and consultancies can write to the owner.
+ * Shown on the About, Privacy, Terms and Review policy pages. Set NEXT_PUBLIC_CONTACT_EMAIL.
+ */
+export const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "contact@example.com";

@@ -6,8 +6,8 @@ import { adminDb, createTestUser, deleteTestUser, resetRateLimits, type TestUser
  * Also: only admins get in, keyboard shortcuts, proof viewing and deleting,
  * replies, reports, the consultancy editor, the CSV import and the audit log.
  *
- * These tests change shared data, so they run one after another, and only on the
- * desktop layout (see playwright.config.ts).
+ * These tests change shared data, so they run one after another, after all the
+ * other tests (see the "admin" project in playwright.config.ts).
  */
 test.describe.configure({ mode: "serial" });
 
