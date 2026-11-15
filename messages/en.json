@@ -10,7 +10,8 @@
     "notFoundBody": "The link may be old, or the name may be spelled differently.",
     "backHome": "Go to the home page",
     "loading": "Loading",
-    "notice": "Notice"
+    "notice": "Notice",
+    "noDatabase": "The database is not connected yet. See \"Set up Supabase\" in README.md."
   },
   "language": {
     "label": "Language",

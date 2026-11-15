@@ -2,12 +2,18 @@
 
 An independent website where students rate and review study-abroad consultancies in Nepal.
 
-- The full plan is in [`CLAUDE.md`](CLAUDE.md).
-- The look and feel is in [`DESIGN.md`](DESIGN.md).
-- Open questions and things only the owner can do are in [`TODO.md`](TODO.md).
-- Speed, accessibility and search-engine scores are in [`QUALITY.md`](QUALITY.md).
+| File | What it is for |
+| --- | --- |
+| [`README.md`](README.md) | This file. How to run, set up, deploy and look after the site. |
+| [`LAUNCH.md`](LAUNCH.md) | The checklist for launch day and the first week. |
+| [`TODO.md`](TODO.md) | What is left, what only you can do, and what was not tested. |
+| [`QUALITY.md`](QUALITY.md) | Speed, accessibility and search-engine scores. |
+| [`CLAUDE.md`](CLAUDE.md) and [`DESIGN.md`](DESIGN.md) | The original brief and design brief, with the decisions made on the way. |
 
 The site name is not decided yet. It is set in one place: `src/config/site.ts`.
+
+**In short, from nothing to a live site:** run it on your computer (below), set up Supabase,
+set up Google sign-in, then follow "Put the site online".
 
 ---
 
@@ -52,7 +58,8 @@ Windows (PowerShell):
 copy .env.example .env.local
 ```
 
-You do not need to change anything in it yet. Supabase keys are added in Phase 3.
+The site starts without changing anything in it. It then shows a note that the database is not connected.
+To see consultancies and reviews, do "Set up Supabase" below and paste the three keys into this file.
 
 ### 4. Start the site
 
@@ -76,7 +83,7 @@ To stop the site, press `Ctrl + C` in the terminal.
 | `npm run check` | Runs the three checks below, one after another. |
 | `npm run lint` | Looks for code mistakes. |
 | `npm run typecheck` | Checks that the code fits together. |
-| `npm run test` | Runs the fast tests (logic, translations). |
+| `npm run test` | Runs the fast tests: ranking formula, form rules, colours, translations, and the database security rules. |
 | `npm run test:e2e` | Opens a hidden browser and clicks through the site like a visitor. |
 
 `npm run test:e2e` needs two things on your computer:
@@ -100,7 +107,7 @@ npx playwright install chromium
 | `src/config` | Settings: site name, feature switches, colours. |
 | `src/i18n` | Language setup. |
 | `messages/` | All text on the site. `en.json` is English, `ne.json` is Nepali. |
-| `content/guides` | The guide articles. |
+| `content/` | The guides and the trust pages (review policy, about, privacy, terms), one file per language. |
 | `supabase/` | The database structure and demo data. |
 | `scripts/` | Small helper programs, for example the consultancy import. |
 | `data/` | Source lists, for example the ministry list of consultancies. |
@@ -347,6 +354,128 @@ To test "report a review": open any consultancy profile, find a review and click
 
 On the production Supabase project, switch off the **Email** provider (**Authentication**, **Sign In / Providers**) so nobody can create an account with a made-up email.
 
-## Vercel
+## Put the site online
 
-Deploying to Vercel is added to this file in Phase 9.
+The code is already on GitHub. Vercel takes it from there and puts it on the internet. It is free for a site this size.
+Follow the steps in order. Use [`LAUNCH.md`](LAUNCH.md) as your checklist on launch day.
+
+### Step 1. A first deploy, to see that it works
+
+1. Go to <https://vercel.com> and sign up with your GitHub account.
+2. Click **Add New**, then **Project**.
+3. Find `consultancies-comparision` in the list and click **Import**. If it is not in the list, click **Adjust GitHub App Permissions** and give Vercel access to this one repository.
+4. Do not change any build setting. Vercel knows this is a Next.js project.
+5. Click **Deploy** and wait about two minutes.
+
+You get an address like `https://consultancies-comparision.vercel.app`. The site opens, with a yellow note that
+the database is not connected yet. That is expected.
+
+From now on, every change pushed to GitHub is deployed by itself.
+
+### Step 2. A second Supabase project for the real site
+
+Keep two Supabase projects, so tests can never touch real reviews:
+
+| Project | Used by | Demo data |
+| --- | --- | --- |
+| `consultancy-reviews-dev` | Your computer and Vercel previews | Yes |
+| `consultancy-reviews-prod` | The live site only | **Never** |
+
+1. Create the production project the same way as in "Set up Supabase" above. Region: **South Asia (Mumbai)**. Save the database password.
+2. Create its tables. Use the production project ref:
+
+```bash
+npx supabase link --project-ref YOUR_PRODUCTION_PROJECT_REF
+```
+
+```bash
+npx supabase db push
+```
+
+**Do not add `--include-seed` here.** The production database must start empty.
+
+3. Check in the Supabase dashboard: **Table Editor**, `consultancies` and `reviews` have 0 rows. **Storage** has a private bucket `proofs`.
+4. Link your computer back to the development project, so you do not change production by accident:
+
+```bash
+npx supabase link --project-ref YOUR_DEVELOPMENT_PROJECT_REF
+```
+
+### Step 3. Tell Vercel the settings
+
+In Vercel open your project, then **Settings**, then **Environment Variables**. Add each name and value.
+For each one, choose which environment it is for.
+
+| Name | Production | Preview |
+| --- | --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Your real address, for example `https://your-site.com`. No slash at the end. | Leave empty |
+| `NEXT_PUBLIC_SITE_ENV` | `production` | Leave empty. Previews then show "Demo data" and stay hidden from search engines. |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | Your contact email | Same |
+| `NEXT_PUBLIC_SUPABASE_URL` | URL of the **production** project | URL of the **development** project |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Publishable key of the **production** project | Publishable key of the **development** project |
+| `SUPABASE_SECRET_KEY` | Secret key of the **production** project. Tick **Sensitive**. | Secret key of the **development** project |
+| `NEXT_PUBLIC_FEATURE_PHONE_OTP` | `false` | `false` |
+| `NEXT_PUBLIC_FEATURE_DEV_LOGIN` | `false` | `false` |
+
+Then open **Deployments**, click the three dots on the newest one and choose **Redeploy**. Settings are read when the site is built.
+
+### Step 4. Your own address (domain)
+
+1. Buy a domain from any registrar.
+2. In Vercel: **Settings**, **Domains**, **Add**. Type the domain and follow the instructions Vercel shows for your registrar.
+3. Set `NEXT_PUBLIC_SITE_URL` to the new address and redeploy.
+
+### Step 5. Google sign-in for the live site
+
+Repeat "Set up Google sign-in" for the production project:
+
+1. In Google Cloud, open your OAuth client and add a second **Authorised redirect URI**:
+   `https://YOUR_PRODUCTION_PROJECT_REF.supabase.co/auth/v1/callback`
+2. In the **production** Supabase project: switch on Google with the same Client ID and secret.
+3. **Authentication**, **URL Configuration**: set **Site URL** to your real address and add `https://your-site.com/**` to **Redirect URLs**.
+4. **Authentication**, **Sign In / Providers**: switch **Email** off.
+
+### Step 6. Make yourself the admin and load the consultancies
+
+1. Open the live site, start a review and sign in with Google once. You do not have to send the review.
+2. In the production Supabase project, open **SQL Editor** and run the "Make your own account an admin" command from above.
+3. Open `https://your-site.com/en/admin`. You should see the empty review queue.
+4. Import the consultancy list. The easy way: **CSV import** in the admin area. Upload `data/consultancies.csv`, click **Check the file**, then **Import now**.
+   Read the notes about the list in `TODO.md` first.
+
+### Step 7. Go through the launch checklist
+
+Open [`LAUNCH.md`](LAUNCH.md) and tick every box.
+
+## Backups
+
+The free Supabase plan keeps **no automatic backups**. Make your own, once a week. It takes one minute.
+
+Link to the production project, save two files, then link back to development:
+
+```bash
+npx supabase link --project-ref YOUR_PRODUCTION_PROJECT_REF
+```
+
+```bash
+npx supabase db dump -f backups/structure.sql
+```
+
+```bash
+npx supabase db dump --data-only -f backups/data.sql
+```
+
+```bash
+npx supabase link --project-ref YOUR_DEVELOPMENT_PROJECT_REF
+```
+
+- The `backups` folder is ignored by Git, because it holds private data. Copy the two files to a safe place, for example a private cloud drive.
+- Proof files are not in the backup. That is on purpose: they are deleted after checking.
+- If you ever need to restore, ask a developer. The two files hold everything.
+
+## When something goes wrong on the live site
+
+- **The site is down or shows an error.** In Vercel open **Deployments**. Click the last deployment that worked, then the three dots, then **Promote to Production**. The site goes back to that version in seconds.
+- **To see what happened.** Vercel: **Logs**. Supabase: **Logs**.
+- **A page shows old information.** Pages are kept for up to an hour to stay fast. Changes made in the admin area appear at once. Changes made directly in Supabase can take an hour, or redeploy to refresh everything.
+- **"Project paused" in Supabase.** The free plan pauses a project after a week with no visitors at all. Open the dashboard and click **Restore**.

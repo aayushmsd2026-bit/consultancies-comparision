@@ -32,9 +32,9 @@ export type SessionUser = { id: string; email: string | null; isAdmin: boolean; 
  * Asked once per page request, however many parts of the page need it.
  */
 export const getSessionUser = cache(async (): Promise<SessionUser | null> => {
-  if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) return null;
   // Who is signed in can only be known when a real visitor asks. Never ahead of time.
   await connection();
+  if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) return null;
   const supabase = await getServerClient();
   const { data, error } = await supabase.auth.getUser();
   if (error || !data.user) return null;

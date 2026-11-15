@@ -25,13 +25,27 @@ These were open questions in the brief. They are now settled and recorded in `CL
 
 ## The owner must do
 
+The order to do things in is in `README.md` ("Put the site online") and `LAUNCH.md`.
+
 - [ ] Decide the site name. Then change `SITE_NAME` in `src/config/site.ts`.
 - [ ] Buy a domain.
-- [ ] Phase 3: create a free Supabase account and project. Steps will be in `README.md`.
-- [ ] Phase 5: create a Google Cloud project for Google sign-in. Steps will be in `README.md`.
-- [ ] Connect the GitHub repo to Vercel (free). Doing this early gives a preview link for every change.
-- [ ] Ask a native Nepali speaker to check all text in `messages/ne.json`. It was written by an AI.
-- [ ] Ask a lawyer to check `/terms` and `/review-policy` before launch.
+- [ ] Create a Supabase account and two projects: one for development, one for production.
+- [ ] Create a Vercel account and import the GitHub repository.
+- [ ] Create a Google Cloud project for Google sign-in.
+- [ ] Set a real contact email (`NEXT_PUBLIC_CONTACT_EMAIL`).
+- [ ] Ask a native Nepali speaker to check all Nepali text. It was written by an AI.
+- [ ] Ask a lawyer to check `/terms`, `/privacy` and `/review-policy` before launch.
+- [ ] Put a weekly backup reminder in your calendar.
+
+## What was not tested
+
+Everything here was built and tested against a local copy of Supabase with fictional data. These things need a real account or a real device, so I could not test them:
+
+- The real Google sign-in button.
+- A real deploy on Vercel. I did check that the site builds and opens with no database settings, as on a first deploy.
+- The commands that send the tables to a hosted Supabase project (`supabase link`, `supabase db push`). The same migration files were applied to the local Supabase.
+- Phone sign-in by SMS (switched off).
+- A real phone, a real screen reader, and a slow real network.
 
 ## The ministry list (data/)
 
@@ -104,4 +118,10 @@ The text is in `content/guides` and `content/pages`, one file per language. You 
 ## Ideas, not built (out of scope for v1)
 
 - Automatic checks on GitHub for every change (GitHub Actions).
-- Consultancies claiming their own profile.
+- Consultancies claiming their own profile. The `is_claimed` field is ready for it.
+- Emails to reviewers (review approved, proof needed).
+- "Helpful" votes on reviews, and a "most helpful" sort.
+- A "my reviews" page where a person can edit a pending review.
+- A "normal fees" guide, once there are sourced numbers.
+- Nepali text in the preview pictures for shared links.
+- An automatic weekly backup.

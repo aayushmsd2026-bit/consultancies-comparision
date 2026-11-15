@@ -49,3 +49,6 @@ next-env.d.ts
 # supabase local
 supabase/.temp/
 supabase/.branches/
+
+# database backups hold private data
+/backups/

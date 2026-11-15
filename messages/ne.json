@@ -10,7 +10,8 @@
     "notFoundBody": "लिङ्क पुरानो हुन सक्छ, वा नामको हिज्जे फरक हुन सक्छ।",
     "backHome": "गृहपृष्ठमा जानुहोस्",
     "loading": "लोड हुँदैछ",
-    "notice": "सूचना"
+    "notice": "सूचना",
+    "noDatabase": "डाटाबेस अझै जोडिएको छैन। README.md को \"Set up Supabase\" हेर्नुहोस्।"
   },
   "language": {
     "label": "भाषा",
