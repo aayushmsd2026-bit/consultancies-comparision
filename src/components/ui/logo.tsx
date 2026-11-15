@@ -10,7 +10,7 @@ export function Logo({ className }: { className?: string }) {
         <span className="absolute top-1.5 left-1.5 size-3 rounded-full bg-signature" />
         <span className="absolute right-1.5 bottom-1.5 size-2 rounded-[0.2rem] bg-spark" />
       </span>
-      <span className="font-display text-heading font-semibold tracking-tight">{SITE_NAME}</span>
+      <span className="font-display text-base min-[360px]:text-[1.125rem] leading-tight font-semibold tracking-tight whitespace-nowrap sm:text-heading">{SITE_NAME}</span>
     </span>
   );
 }

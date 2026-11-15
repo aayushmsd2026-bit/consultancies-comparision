@@ -25,7 +25,9 @@ These were open questions in the brief. They are now settled and recorded in `CL
 
 ## Live status
 
-- Live at https://bharosa-nepal.vercel.app since 15 Nov 2026.
+- Live at https://ratemyconsultancy.vercel.app since 15 Nov 2026 (the old address bharosa-nepal.vercel.app redirects there).
+- Site name: Rate My Consultancy. It says what the site does.
+- Contact email: waiting for the owner to create a dedicated Gmail. Until then the pages show contact@example.com.
 - 924 consultancies imported from the ministry list (final, per the owner), all marked Registered, source link https://moest.gov.np.
 - Waiting for the owner: Google sign-in (Client ID and secret into Supabase), then make the owner's account admin.
 - Later: connect a .com domain (README, "Your own address").

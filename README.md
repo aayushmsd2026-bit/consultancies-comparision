@@ -10,7 +10,7 @@ An independent website where students rate and review study-abroad consultancies
 | [`QUALITY.md`](QUALITY.md) | Speed, accessibility and search-engine scores. |
 | [`CLAUDE.md`](CLAUDE.md) and [`DESIGN.md`](DESIGN.md) | The original brief and design brief, with the decisions made on the way. |
 
-**Live site:** <https://bharosa-nepal.vercel.app>. The site is called **Bharosa** (भरोसा, "trust"). The name is set in one place: `src/config/site.ts`.
+**Live site:** <https://ratemyconsultancy.vercel.app>. The site is called **Rate My Consultancy**. The name is set in one place: `src/config/site.ts`.
 
 | Service | What it holds |
 | --- | --- |
