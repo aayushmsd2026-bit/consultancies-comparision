@@ -23,6 +23,14 @@ These were open questions in the brief. They are now settled and recorded in `CL
 - **Fonts.** Fraunces for headlines, Inter for text, Noto Sans Devanagari for Nepali.
 - **Numbers on Nepali pages** use Devanagari digits (४.२) and Bikram Sambat dates.
 
+## Live status
+
+- Live at https://bharosa-nepal.vercel.app since 15 Nov 2026.
+- 924 consultancies imported from the ministry list (final, per the owner), all marked Registered, source link https://moest.gov.np.
+- Waiting for the owner: Google sign-in (Client ID and secret into Supabase), then make the owner's account admin.
+- Later: connect a .com domain (README, "Your own address").
+- The trust pages no longer show the yellow "Draft" note (owner asked to finalize). The DRAFT comment stays at the top of each file. A lawyer review is still recommended.
+
 ## The owner must do
 
 The order to do things in is in `README.md` ("Put the site online") and `LAUNCH.md`.

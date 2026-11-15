@@ -10,7 +10,12 @@ An independent website where students rate and review study-abroad consultancies
 | [`QUALITY.md`](QUALITY.md) | Speed, accessibility and search-engine scores. |
 | [`CLAUDE.md`](CLAUDE.md) and [`DESIGN.md`](DESIGN.md) | The original brief and design brief, with the decisions made on the way. |
 
-The site name is not decided yet. It is set in one place: `src/config/site.ts`.
+**Live site:** <https://bharosa-nepal.vercel.app>. The site is called **Bharosa** (भरोसा, "trust"). The name is set in one place: `src/config/site.ts`.
+
+| Service | What it holds |
+| --- | --- |
+| Vercel project `consultancies-comparision` | The website. Every push to `main` on GitHub is published by itself. |
+| Supabase project `dgnyoymuuysxvwkdsnio` (Tokyo) | The live database: 924 consultancies from the ministry list, no demo data. |
 
 **In short, from nothing to a live site:** run it on your computer (below), set up Supabase,
 set up Google sign-in, then follow "Put the site online".
